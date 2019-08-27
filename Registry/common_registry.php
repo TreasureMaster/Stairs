@@ -2,7 +2,7 @@
 
 namespace StairRegistry;
 
-use StairElement;
+// use StairElement;
 
 require_once('StairElement/common_file.php');
 
@@ -25,10 +25,10 @@ class StairElementRegistry
         switch ($regname) {
           case "level":
               if ($opts["elem_length"] > 1000) {
-                $product = new StairElement\LongLevel($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+                $product = new \StairElement\LongLevel($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
                 break;
               } else {
-                $product = new StairElement\ShortLevel($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+                $product = new \StairElement\SquareElement\ShortLevel($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
                 break;
               }
           case "landing":
