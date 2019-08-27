@@ -7,15 +7,6 @@ namespace StairElement;
 
 
 
-/* ----------------------- Длинная ступень (свыше 1м) ----------------------- */
-
-class LongLevel extends SquareElement
-{
-  public function getElementText()
-  {
-    return "Ступень длинная {$this->length}x{$this->width} - {$this->quantity} шт.";
-  }
-}
 
 /* -------------------------------- Площадка -------------------------------- */
 
