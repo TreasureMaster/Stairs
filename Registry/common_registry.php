@@ -53,10 +53,10 @@ class StairElementRegistry
               $product = new \StairElement\SquareElement\PseudoBridgeBoard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "baluster":
-              $product = new StairElement\Baluster($opts['elem_pcs']);
+              $product = new \StairElement\PieceElement\Baluster($opts['elem_pcs']);
               break;
           case "balustradecolumn":
-              $product = new StairElement\BalustradeColumn($opts['elem_pcs']);
+              $product = new \StairElement\PieceElement\BalustradeColumn($opts['elem_pcs']);
               break;
           case "rodcolumn":
               $product = new StairElement\RodColumn($opts['elem_meter']);
