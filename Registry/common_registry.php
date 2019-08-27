@@ -32,25 +32,25 @@ class StairElementRegistry
                 break;
               }
           case "landing":
-              $product = new StairElement\StairLanding($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+              $product = new \StairElement\SquareElement\StairLanding($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "riser":
-              $product = new StairElement\StairRiser($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+              $product = new \StairElement\SquareElement\StairRiser($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "figuredlevel":
-              $product = new StairElement\FiguredLevel($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+              $product = new \StairElement\SquareElement\FiguredLevel($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "bridgeboard":
-              $product = new StairElement\BridgeBoard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+              $product = new \StairElement\SquareElement\BridgeBoard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "jackboard":
-              $product = new StairElement\JackBoard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+              $product = new \StairElement\SquareElement\JackBoard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "stairbaseboard":
-              $product = new StairElement\StairBaseboard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+              $product = new \StairElement\SquareElement\StairBaseboard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "falsebridgeboard":
-              $product = new StairElement\PseudoBridgeBoard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
+              $product = new \StairElement\SquareElement\PseudoBridgeBoard($opts['elem_length'], $opts['elem_width'], $opts['elem_height'], $opts['elem_quantity']);
               break;
           case "baluster":
               $product = new StairElement\Baluster($opts['elem_pcs']);
