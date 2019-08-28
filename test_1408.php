@@ -8,7 +8,7 @@
 
   // require_once('StairElement/list_name.php');
   require_once('StairMaterial/common_material.php');
-  require_once('Stair/stair.php');
+  // require_once('Stair/stair.php');
   require_once('Registry/common_registry.php');
 
   // создаем лестницу, включающую элементы (длина, ширина, толщина, количество)

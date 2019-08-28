@@ -1,7 +1,7 @@
 <?php
 namespace Stair;
 
-use StairMaterial, StairElement;
+use StairMaterial;
 
 require_once('StairMaterial/common_material.php');
 
@@ -25,7 +25,7 @@ class Stair
 
 /* --------------------- добавление элемента в лестницу --------------------- */
 
-  public function addStairElement(StairElement\StairElement $element)
+  public function addStairElement(\StairElement\StairElement $element)
   {
     $this->elements[$element->getFullElementName()] = $element;
   }
