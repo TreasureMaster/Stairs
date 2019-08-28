@@ -59,22 +59,22 @@ class StairElementRegistry
               $product = new \StairElement\PieceElement\BalustradeColumn($opts['elem_pcs']);
               break;
           case "rodcolumn":
-              $product = new StairElement\RodColumn($opts['elem_meter']);
+              $product = new \StairElement\LinearMeterElement\RodColumn($opts['elem_meter']);
               break;
           case "handrail":
-              $product = new StairElement\Handrail($opts['elem_meter']);
+              $product = new \StairElement\LinearMeterElement\Handrail($opts['elem_meter']);
               break;
           case "stairtrim":
-              $product = new StairElement\StairTrim($opts['elem_meter']);
+              $product = new \StairElement\LinearMeterElement\StairTrim($opts['elem_meter']);
               break;
           case "balusterbottomboard":
-              $product = new StairElement\BalusterBottomBoard($opts['elem_meter']);
+              $product = new \StairElement\LinearMeterElement\BalusterBottomBoard($opts['elem_meter']);
               break;
           case "customboard":
-              $product = new StairElement\CustomBoard($opts['elem_meter']);
+              $product = new \StairElement\LinearMeterElement\CustomBoard($opts['elem_meter']);
               break;
           case "benthandrail":
-              $product = new StairElement\BentHandrail($opts['elem_meter']);
+              $product = new \StairElement\LinearMeterElement\BentHandrail($opts['elem_meter']);
               break;
           default:
               $product = false;
