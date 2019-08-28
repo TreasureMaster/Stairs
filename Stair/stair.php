@@ -1,9 +1,7 @@
 <?php
 namespace Stair;
 
-use StairMaterial;
-
-// require_once('StairMaterial/common_material.php');
+// use StairMaterial;
 
 /* -------------------------------------------------------------------------- */
 /*                        Создание экземпляра лестницы                        */
@@ -18,7 +16,7 @@ class Stair
   // общая цена материалов и изготовления лестницы
   private $total_elements_price = 0;
 
-  public function __construct(StairMaterial\StairMaterial $material)
+  public function __construct(\StairMaterial\StairMaterial $material)
   {
     $this->material = $material;
   }
