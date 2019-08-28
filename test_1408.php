@@ -5,8 +5,8 @@
   use StairElement, StairMaterial, Stair, StairRegistry;
 
   require_once('vendor/autoload.php');
-  require_once('StairElement/common_file.php');
-  require_once('StairElement/list_name.php');
+
+  // require_once('StairElement/list_name.php');
   require_once('StairMaterial/common_material.php');
   require_once('Stair/stair.php');
   require_once('Registry/common_registry.php');

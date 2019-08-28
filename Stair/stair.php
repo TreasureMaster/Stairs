@@ -4,7 +4,6 @@ namespace Stair;
 use StairMaterial, StairElement;
 
 require_once('StairMaterial/common_material.php');
-require_once('StairElement/common_file.php');
 
 /* -------------------------------------------------------------------------- */
 /*                        Создание экземпляра лестницы                        */
