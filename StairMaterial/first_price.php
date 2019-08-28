@@ -1,5 +1,7 @@
 <?php
-namespace StairMaterial;
+// обернуто в функцию, т.к. автозагрузчик не подгружает переменные
+function specifyMaterial($material)
+{
 /* -------------------------------------------------------------------------- */
 /*                      Фиксированный прайс по материалам                     */
 /* -------------------------------------------------------------------------- */
@@ -91,4 +93,23 @@ $oak_price = [
   'customboard'         => 330,     // нестандартный профиль
   'benthandrail'        => 4480     // гнутый поручень
   ];
+
+  switch ($material) {
+    case 'pine':
+      return $pine_price;
+      break;
+    case 'larch':
+      return $larch_price;
+      break;
+    case 'ash':
+      return $ash_price;
+      break;
+    case 'oak':
+      return $oak_price;
+      break;
+    default:
+      return false;
+      break;
+  }
+}
 ?>

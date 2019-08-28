@@ -3,7 +3,7 @@ namespace Stair;
 
 use StairMaterial;
 
-require_once('StairMaterial/common_material.php');
+// require_once('StairMaterial/common_material.php');
 
 /* -------------------------------------------------------------------------- */
 /*                        Создание экземпляра лестницы                        */

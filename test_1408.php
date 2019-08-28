@@ -6,8 +6,10 @@
 
   require_once('vendor/autoload.php');
 
+  // var_dump(specifyMaterial('pine'));
+  // exit;
   // require_once('StairElement/list_name.php');
-  require_once('StairMaterial/common_material.php');
+  // require_once('StairMaterial/common_material.php');
   // require_once('Stair/stair.php');
   require_once('Registry/common_registry.php');
 
@@ -37,7 +39,7 @@
   // exit;
 
   // Создание объекта лестницы из заданного материала
-  $stair = new Stair\Stair (StairMaterial\PineMaterial::getInstance($pine_price));
+  $stair = new Stair\Stair (StairMaterial\PineMaterial::getInstance(specifyMaterial('pine')));
   // $total = 0;
 //   echo $jackboard_1200x300->getShortElementName();
 //   echo '<br>';
