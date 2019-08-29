@@ -31,7 +31,21 @@ abstract class StairElement
   }
 
   // возвращаем JSON представление массива свойств объекта для отправки в js
-  abstract public function getJsonProperties();
+  // abstract public function getJsonProperties();
+
+  // возвращает представление свойств объекта в виде JSON-строки
+  public function getJsonProperties()
+  {
+    $props = [];
+    foreach ($this as $key => $value) {
+      $props[$key] = $value;
+    }
+    // $json[$this->getFullElementName()] = $props;
+    $props['name'] = $this->getFullElementName();
+    $props['stair_element'] = $this->getShortElementName();
+    $props['text'] = $this->getHtmlButton();
+    return json_encode($props);
+  }
 }
 
 ?>
