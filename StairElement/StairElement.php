@@ -25,10 +25,13 @@ abstract class StairElement
   // возвращаем HTML-код кнопки
   public function getHtmlButton()
   {
-    $button = '<button id="' . $this->getFullElementName() . '"class="button-option" type="button"><span>--</span></button><span>  ';
+    $button = '<button id="' . $this->getFullElementName() . '" class="button-option" type="button"><span>--</span></button><span>  ';
     $button .= $this->getElementText() . '</span><br>';
     return $button;
   }
+
+  // возвращаем JSON представление массива свойств объекта для отправки в js
+  abstract public function getJsonProperties();
 }
 
 ?>

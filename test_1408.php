@@ -15,9 +15,11 @@
   if ($_POST['button'] == 'submitElement') {
     // var_dump($_POST);
     // exit;
+    // текущий элемент
     $current_elem = StairRegistry\StairElementRegistry::getInstance($_POST);
     $stair->addStairElement($current_elem);
-    echo $current_elem->getHtmlButton();
+    echo $current_elem->getJsonProperties();
+    // echo $current_elem->getHtmlButton();
   }
   if ($_POST['button'] == 'submitStair') {
     $total = $stair->getTotalStairPrice();

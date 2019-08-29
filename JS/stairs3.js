@@ -3,6 +3,8 @@
 $(document).ready(function() {
   // переменная, содержащая номер группы элементов
   let elem_group;
+  // собираем все элементы лестницы
+  let stair = [];
   // в переменной сохраняется объект, к которому будет добавлена строка
   // сделано более глобально, чтобы сократить код (хотя придется чуть использовать ресурсы компа для ошибочного выбора)
   let add_elem;
@@ -12,8 +14,6 @@ $(document).ready(function() {
   // Сохраняем и выделяем элементы с checked (предыдущий проект, удалить)
   var saveattributes = [];
   saveattributes = fontWeight($('input[checked]'));
-
-  
 
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */
 
@@ -41,44 +41,6 @@ $(document).ready(function() {
         break;
     }
   });
-/* ----------------------- Нажатие клавиши "Изменить" ----------------------- */
-
-  $("#changeView").click(function(event) {
-    // Отключить стандартное действие при событии click (отправку формы)
-    event.preventDefault();
-
-    var data = $("#basicParamsForm").serializeArray();
-
-    $.post($('#basicParamsForm').attr('action'), data, function(json) {
-      // if (json.status == 'fail') {
-      //   alert(json.message);
-      // }
-      // if (json.status == 'success') {
-      //   alert(json.message);
-      // }
-      // $('#phpResult').empty();
-      
-      // Удаляем ранее выделенные атрибуты
-      // delChecked(saveattributes);
-      $(saveattributes).each(function (index) {
-        $(this).prev().attr('checked', false);
-        $(this).css('font-weight', 'normal');
-      });
-
-      $.each(json, function(key, value) {
-        if (key != 'status') {
-          // Это просто тестовая надпись
-          // $('#phpResult').append('<p>Ключ: <strong>' + key + '</strong>, значение: <strong>' + value + '</strong></p>');
-          $('#flexview').css(key, value); // присваиваем flex-контейнеру свойства
-          $("#flex_" + value.replace("-", "_")).attr('checked', true); // устанавливаем атрибуты checked новым input`ам
-        }
-      });
-      saveattributes = fontWeight($('input[checked]')); // выделяем новые checked
-      // $('#phpResult').find('p strong').css('color', 'red');
-    }, "json");
-  });
-/* -------------------------------------------------------------------------- */
-
 
 /* ----------------------- Нажатие клавиши "Добавить" ----------------------- */
 
@@ -86,24 +48,20 @@ $(document).ready(function() {
   $("#submitElement").click (function(event) {
     // отключить стандартное действие по событию click (отправку формы)
     event.preventDefault();
-    // console.log(event);
-    // console.log(event.currentTarget.id);
+    // готовим данные для отправки
     let searchdata = $("#addElemForm").serializeArray();
     // добавляем название кнопки, при помощи которой отправляется форма
-    // let submit_name = Object.create(null);
-    // submit_name.name = "button";
-    // submit_name.value = event.currentTarget.id;
     searchdata.push(getSubmitName(event.currentTarget.id));
 
-    // console.log(typeof searchdata[0]);
-    // searchdata.push('{name: "button", value: "' + event.currentTarget.id + '"}');
     console.log(searchdata);
 
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
-    $.post($("#addElemForm").attr('action'), searchdata, function(text) {
-      // console.log(text);
-      add_elem.append(text);
-    }, "text");
+    $.post($("#addElemForm").attr('action'), searchdata, function(json) {
+      stair.push(json);
+      console.log(stair);
+      // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
+      add_elem.append(json.text);
+    }, "json");
   });
 });
 /* -------------------------------------------------------------------------- */
@@ -122,6 +80,44 @@ $(document).ready(function() {
     // add_elem.append(text);
     }, "text");
   });
+/* -------------------------------------------------------------------------- */
+
+/* ----------------------- Нажатие клавиши "Изменить" ----------------------- */
+
+$("#changeView").click(function (event) {
+  // Отключить стандартное действие при событии click (отправку формы)
+  event.preventDefault();
+
+  var data = $("#basicParamsForm").serializeArray();
+
+  $.post($('#basicParamsForm').attr('action'), data, function (json) {
+    // if (json.status == 'fail') {
+    //   alert(json.message);
+    // }
+    // if (json.status == 'success') {
+    //   alert(json.message);
+    // }
+    // $('#phpResult').empty();
+
+    // Удаляем ранее выделенные атрибуты
+    // delChecked(saveattributes);
+    $(saveattributes).each(function (index) {
+      $(this).prev().attr('checked', false);
+      $(this).css('font-weight', 'normal');
+    });
+
+    $.each(json, function (key, value) {
+      if (key != 'status') {
+        // Это просто тестовая надпись
+        // $('#phpResult').append('<p>Ключ: <strong>' + key + '</strong>, значение: <strong>' + value + '</strong></p>');
+        $('#flexview').css(key, value); // присваиваем flex-контейнеру свойства
+        $("#flex_" + value.replace("-", "_")).attr('checked', true); // устанавливаем атрибуты checked новым input`ам
+      }
+    });
+    saveattributes = fontWeight($('input[checked]')); // выделяем новые checked
+    // $('#phpResult').find('p strong').css('color', 'red');
+  }, "json");
+});
 /* -------------------------------------------------------------------------- */
 
 /* --------- Функция для добавления в массив объекта-названия кнопки -------- */
