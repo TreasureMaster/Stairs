@@ -20,7 +20,7 @@ $(document).ready(function() {
   $("select#stair_element").change(function() {
     // очистить предыдущие значения
     $("#addElemForm input").not("[type=submit]").each(function(index, value) {
-      console.log(value.value);
+      // console.log(value.value);
       value.value = "";
       // value.removeAttribute("value");
     });
@@ -71,62 +71,64 @@ $(document).ready(function() {
       add_elem.append(json.text);
     }, "json");
   });
-});
-/* -------------------------------------------------------------------------- */
 
-/* ---------------------- Нажатие клавиши "Рассчитать" ---------------------- */
+  /* -------------------------------------------------------------------------- */
+
+  /* ---------------------- Нажатие клавиши "Рассчитать" ---------------------- */
 
   // При нажатии кнопки "рассчитать" отправляется только название кнопки
-  $("#submitStair").click(function(event) {
+  $("#submitStair").click(function (event) {
     event.preventDefault();
     let searchdata = [];
     searchdata.push(getSubmitName(event.currentTarget.id));
     // console.log(searchdata);
     $.post($("#addElemForm").attr('action'), searchdata, function (text) {
       // здесь будет возврат в форму результатов расчета
-    console.log(text);
-    // add_elem.append(text);
+      console.log(text);
+      // add_elem.append(text);
     }, "text");
   });
+  /* -------------------------------------------------------------------------- */
+
+  /* ----------------------- Нажатие клавиши "Изменить" ----------------------- */
+
+  $("#changeView").click(function (event) {
+    // Отключить стандартное действие при событии click (отправку формы)
+    event.preventDefault();
+
+    var data = $("#basicParamsForm").serializeArray();
+
+    $.post($('#basicParamsForm').attr('action'), data, function (json) {
+      // if (json.status == 'fail') {
+      //   alert(json.message);
+      // }
+      // if (json.status == 'success') {
+      //   alert(json.message);
+      // }
+      // $('#phpResult').empty();
+
+      // Удаляем ранее выделенные атрибуты
+      // delChecked(saveattributes);
+      $(saveattributes).each(function (index) {
+        $(this).prev().attr('checked', false);
+        $(this).css('font-weight', 'normal');
+      });
+
+      $.each(json, function (key, value) {
+        if (key != 'status') {
+          // Это просто тестовая надпись
+          // $('#phpResult').append('<p>Ключ: <strong>' + key + '</strong>, значение: <strong>' + value + '</strong></p>');
+          $('#flexview').css(key, value); // присваиваем flex-контейнеру свойства
+          $("#flex_" + value.replace("-", "_")).attr('checked', true); // устанавливаем атрибуты checked новым input`ам
+        }
+      });
+      saveattributes = fontWeight($('input[checked]')); // выделяем новые checked
+      // $('#phpResult').find('p strong').css('color', 'red');
+    }, "json");
+  });
 /* -------------------------------------------------------------------------- */
+}); // конец блока document.ready
 
-/* ----------------------- Нажатие клавиши "Изменить" ----------------------- */
-
-$("#changeView").click(function (event) {
-  // Отключить стандартное действие при событии click (отправку формы)
-  event.preventDefault();
-
-  var data = $("#basicParamsForm").serializeArray();
-
-  $.post($('#basicParamsForm').attr('action'), data, function (json) {
-    // if (json.status == 'fail') {
-    //   alert(json.message);
-    // }
-    // if (json.status == 'success') {
-    //   alert(json.message);
-    // }
-    // $('#phpResult').empty();
-
-    // Удаляем ранее выделенные атрибуты
-    // delChecked(saveattributes);
-    $(saveattributes).each(function (index) {
-      $(this).prev().attr('checked', false);
-      $(this).css('font-weight', 'normal');
-    });
-
-    $.each(json, function (key, value) {
-      if (key != 'status') {
-        // Это просто тестовая надпись
-        // $('#phpResult').append('<p>Ключ: <strong>' + key + '</strong>, значение: <strong>' + value + '</strong></p>');
-        $('#flexview').css(key, value); // присваиваем flex-контейнеру свойства
-        $("#flex_" + value.replace("-", "_")).attr('checked', true); // устанавливаем атрибуты checked новым input`ам
-      }
-    });
-    saveattributes = fontWeight($('input[checked]')); // выделяем новые checked
-    // $('#phpResult').find('p strong').css('color', 'red');
-  }, "json");
-});
-/* -------------------------------------------------------------------------- */
 
 /* --------- Функция для добавления в массив объекта-названия кнопки -------- */
 
