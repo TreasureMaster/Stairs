@@ -1,0 +1,14 @@
+{
+  "name": "izruska/stair",
+  "description": "Calculate price for my stairs",
+  "autoload": {
+    "psr-4": {
+      "StairElement\\": "StairElement",
+      "Stair\\": "Stair",
+      "StairMaterial\\": "StairMaterial"
+    },
+    "files": [
+      "StairMaterial/first_price.php"
+    ]
+  }
+}
