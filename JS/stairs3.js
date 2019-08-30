@@ -4,7 +4,7 @@ $(document).ready(function() {
   // переменная, содержащая номер группы элементов
   let elem_group;
   // собираем все элементы лестницы
-  let stair = [];
+  let stair = Object.create(null);
   // в переменной сохраняется объект, к которому будет добавлена строка
   // сделано более глобально, чтобы сократить код (хотя придется чуть использовать ресурсы компа для ошибочного выбора)
   let add_elem;
@@ -59,16 +59,17 @@ $(document).ready(function() {
     let searchdata = $("#addElemForm").serializeArray();
     // добавляем название кнопки, при помощи которой отправляется форма
     searchdata.push(getSubmitName(event.currentTarget.id));
-
     console.log(searchdata);
 
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
-      stair.push(json);
-      console.log(stair);
-      // console.log(Object.entries(stair[0]));
       // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
       add_elem.append(json.text);
+      // и удаляем ненужную теперь строку
+      delete json.text;
+      // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
+      stair[json.name] = JSON.stringify(json);
+      console.log(stair);
     }, "json");
   });
 
@@ -79,10 +80,10 @@ $(document).ready(function() {
   // При нажатии кнопки "рассчитать" отправляется только название кнопки
   $("#submitStair").click(function (event) {
     event.preventDefault();
-    let searchdata = [];
-    searchdata.push(getSubmitName(event.currentTarget.id));
-    // console.log(searchdata);
-    $.post($("#addElemForm").attr('action'), searchdata, function (text) {
+    // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
+    stair.button = event.currentTarget.id;
+
+    $.post($("#addElemForm").attr('action'), stair, function (text) {
       // здесь будет возврат в форму результатов расчета
       console.log(text);
       // add_elem.append(text);
