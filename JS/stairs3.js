@@ -32,7 +32,7 @@ $(document).ready(function() {
       $(".linear_elem").show();
       $(".square_elem, .piece_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
-      add_elem = $("article#stair_handrail");
+      add_elem = $("article#stair_baluster");
     } else {
       $(".square_elem").show();
       $(".piece_elem, .linear_elem").hide();
