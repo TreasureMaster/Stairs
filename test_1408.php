@@ -22,7 +22,14 @@
     // echo $current_elem->getHtmlButton();
   }
   if ($_POST['button'] == 'submitStair') {
-    var_dump($_POST);
+    // var_dump($_POST);
+    $elems = [];
+    foreach ($_POST as $key => $value) {
+      if ($key != 'button') {
+        array_push($elems, json_decode($value, true));
+      }
+    }
+    var_dump($elems);
     exit;
     $total = $stair->getTotalStairPrice();
     echo "Общая цена материалов лестницы составляет $total<br>";
