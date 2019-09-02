@@ -16,7 +16,7 @@ abstract class SquareElement extends StairElement
   // площадь элемента
   // private $square;
   // ??? толщина элемента (пока неизвестно нужна ли)
-  private $height;
+  protected $height;
   // количество элементов (по умолчанию 0)
   protected $quantity;
   // цена одного элемента (возможно ссылка на объект прайса)
@@ -28,6 +28,7 @@ abstract class SquareElement extends StairElement
     $this->width = $width;
     $this->height = $height;
     $this->quantity = $quantity;
+    $this->marked = Mark::SQUARE;
     // $this->square = $this->getSquare();
   }
 
@@ -46,19 +47,6 @@ abstract class SquareElement extends StairElement
   {
     return $this->getShortElementName() . '_' . $this->length . 'x' . $this->width;
   }
-  // // возвращает представление свойств объекта в виде JSON-строки
-  // public function getJsonProperties()
-  // {
-  //   $props = [];
-  //   foreach ($this as $key => $value) {
-  //     $props[$key] = $value;
-  //   }
-  //   // $json[$this->getFullElementName()] = $props;
-  //   $props['name'] = $this->getFullElementName();
-  //   $props['stair_element'] = $this->getShortElementName();
-  //   $props['text'] = $this->getHtmlButton();
-  //   return json_encode($props);
-  // }
 }
   /* -------------------------------------------------------------------------- */
 ?>

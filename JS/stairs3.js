@@ -1,8 +1,10 @@
 /// <reference path="../typings/globals/jquery/index.d.ts" />
 
 $(document).ready(function() {
-  // переменная, содержащая номер группы элементов
-  let elem_group;
+  // массив, содержащий имена PIECES элементов
+  let elem_pcs = ['baluster', 'balustradecolumn'];
+  // массив, содержащий имена LINEAR элементов
+  let elem_ln = ['rodcolumn', 'handrail', 'stairtrim', 'balusterbottomboard', 'customboard', 'benthandrail'];
   // собираем все элементы лестницы
   let stair = Object.create(null);
   // в переменной сохраняется объект, к которому будет добавлена строка
@@ -21,27 +23,25 @@ $(document).ready(function() {
     // очистить предыдущие значения формы
     $('#addElemForm input:not([type=submit])').val("");
     // получаем номер группы по выбранному элементу
-    elem_group = Number(($("select#stair_element").val()).slice(-1));
-    switch (elem_group) {
-      case 1:
-        $(".square_elem").show();
-        $(".piece_elem, .linear_elem").hide();
-        // выбираем flex_box, куда записываются полученные данные
-        add_elem = $("article#stair_level");
-        break;
-      case 2:
-        $(".piece_elem").show();
-        $(".square_elem, .linear_elem").hide();
-        // выбираем flex_box, куда записываются полученные данные
-        add_elem = $("article#stair_baluster");
-        break;
-      case 3:
-        $(".linear_elem").show();
-        $(".square_elem, .piece_elem").hide();
-        // выбираем flex_box, куда записываются полученные данные
-        add_elem = $("article#stair_handrail");
-        break;
+    // elem_group = Number(($("select#stair_element").val()).slice(-1));
+    // switch (elem_group) {
+    if (elem_pcs.indexOf($("select#stair_element").val()) > -1) {
+      $(".piece_elem").show();
+      $(".square_elem, .linear_elem").hide();
+      // выбираем flex_box, куда записываются полученные данные
+      add_elem = $("article#stair_baluster");
+    } else if (elem_ln.indexOf($("select#stair_element").val()) > -1) {
+      $(".linear_elem").show();
+      $(".square_elem, .piece_elem").hide();
+      // выбираем flex_box, куда записываются полученные данные
+      add_elem = $("article#stair_handrail");
+    } else {
+      $(".square_elem").show();
+      $(".piece_elem, .linear_elem").hide();
+      // выбираем flex_box, куда записываются полученные данные
+      add_elem = $("article#stair_level");
     }
+    // }
   });
 
 /* ----------------------- Нажатие клавиши "Добавить" ----------------------- */
@@ -57,16 +57,16 @@ $(document).ready(function() {
     console.log(searchdata);
 
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
-    $.post($("#addElemForm").attr('action'), searchdata, function(text) {
+    $.post($("#addElemForm").attr('action'), searchdata, function(json) {
       // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
-      // add_elem.append(json.text);
+      add_elem.append(json.text);
       // и удаляем ненужную теперь строку
-      // delete json.text;
+      delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
-      // stair[json.name] = JSON.stringify(json);
-      // console.log(stair);
-      console.log(text);
-    }, "text");
+      stair[json.name] = JSON.stringify(json);
+      console.log(stair);
+      // console.log(text);
+    }, "json");
   });
 
   /* -------------------------------------------------------------------------- */

@@ -14,6 +14,7 @@ abstract class PieceElement extends StairElement
   public function __construct($quantity = 0)
   {
     $this->quantity = $quantity;
+    $this->marked = Mark::PIECES;
   }
   // общее количество элементов
   public function getTotalAmount()

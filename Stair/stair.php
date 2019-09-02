@@ -42,10 +42,10 @@ class Stair
     $this->total_elements_price = 0;
     foreach ($this->elements as $name =>$element) {
       $this->total_elements_price += $this->getTotalElementPrice($element->getFullElementName());
-      // пока выводим для теста
-      echo "Общая цена всех элементов ( <strong>{$element->getFullElementName()}</strong> ) 
-            составляет {$this->getTotalElementPrice($name)} руб.<br>";
     }
+    // пока выводим для теста
+    // echo "Общая цена всех элементов ( <strong>{$element->getFullElementName()}</strong> ) 
+    //         составляет {$this->getTotalElementPrice($name)} руб.<br>";
     return $this->total_elements_price;
   }
 

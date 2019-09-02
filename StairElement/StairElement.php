@@ -6,8 +6,10 @@
 
 abstract class StairElement
 {
-  // название элемента, по которому ищется цена в прайсе
-  // private $element_name;
+  // массив сборки свойств для JSON
+  protected $props = [];
+  // переменная для маркировки массива вывода свойств объекта
+  protected $marked;
   // Функция, общая для всех элементов. Выдает общую сущность для расчета (общая площадь, общее кол-во, общий погонаж)
   abstract public function getTotalAmount();
 
@@ -36,15 +38,15 @@ abstract class StairElement
   // возвращает представление свойств объекта в виде JSON-строки
   public function getJsonProperties()
   {
-    $props = [];
     foreach ($this as $key => $value) {
-      $props[$key] = $value;
+      if ($key != 'props' && $key != 'marked') {
+        $this->props[$key][$this->marked] = $value;
+      }
     }
-    // $json[$this->getFullElementName()] = $props;
-    $props['name'] = $this->getFullElementName();
-    $props['stair_element'] = $this->getShortElementName();
-    $props['text'] = $this->getHtmlButton();
-    return json_encode($props);
+    $this->props['name'] = $this->getFullElementName();
+    $this->props['stair_element'] = $this->getShortElementName();
+    $this->props['text'] = $this->getHtmlButton();
+    return json_encode($this->props);
   }
 }
 
