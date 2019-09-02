@@ -62,22 +62,23 @@
             </select><br>
             <hr>
             <!-- Элемент, учитываемый по площади -->
-            <label class="square_elem" for="elem_length">Длина элемента (мм)</label>
-            <input type="text" class="square_elem" name="elem_length" id="elem_length">
-            <label class="square_elem" for="elem_width">Ширина элемента (мм)</label>
-            <input type="text" class="square_elem" name="elem_width" id="elem_width">
-            <label class="square_elem" for="elem_height">Толщина элемента (мм)</label>
-            <input type="text" class="square_elem" name="elem_height" id="elem_height">
-            <label class="square_elem" for="elem_quantity">Количество элементов (шт)</label>
-            <input type="text" class="square_elem" name="elem_quantity" id="elem_quantity">
+            <label class="square_elem" for="length[sq]">Длина элемента (мм)</label>
+            <input type="text" class="square_elem" name="length[sq]" id="elem_length">
+            <label class="square_elem" for="width[sq]">Ширина элемента (мм)</label>
+            <input type="text" class="square_elem" name="width[sq]" id="elem_width">
+            <label class="square_elem" for="height[sq]">Толщина элемента (мм)</label>
+            <input type="text" class="square_elem" name="height[sq]" id="elem_height">
+            <label class="square_elem" for="quantity[sq]">Количество элементов (шт)</label>
+            <input type="text" class="square_elem" name="quantity[sq]" id="elem_quantity">
             <!-- Штучный элемент (балясина, столб) -->
-            <label class="piece_elem" for="elem_pcs">Количество элементов (шт)</label>
-            <input type="text" class="piece_elem" name="elem_pcs" id="elem_pcs">
+            <label class="piece_elem" for="quantity[pcs]">Количество элементов (шт)</label>
+            <input type="text" class="piece_elem" name="quantity[pcs]" id="elem_pcs">
             <!-- Элементы, учитываемые по длине (перила, раскладка) -->
-            <label class="linear_elem" for="elem_meter">Длина элемента (пог.м)</label>
-            <input type="text" class="linear_elem" name="elem_meter" id="elem_meter">
-            <label class="linear_elem" for="line_quantity">Количество элементов (шт)</label>
-            <input type="text" class="linear_elem" name="line_quantity" id="line_quantity">
+            <label class="linear_elem" for="length[ln]">Длина элемента (пог.м)</label>
+            <input type="text" class="linear_elem" name="length[ln]" id="elem_meter">
+            <label class="linear_elem" for="quantity[ln]">Количество элементов (шт)</label>
+            <input type="text" class="linear_elem" name="quantity[ln]" id="line_quantity">
+            <!-- Кнопки -->
             <input type="submit" value="Добавить" id="submitElement" name="submitElement" class="button button-shift">
             <input type="submit" value="Рассчитать" id="submitStair" name="submitStair" class="button button-shift">
           </article>

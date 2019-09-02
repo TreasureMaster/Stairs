@@ -57,15 +57,16 @@ $(document).ready(function() {
     console.log(searchdata);
 
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
-    $.post($("#addElemForm").attr('action'), searchdata, function(json) {
+    $.post($("#addElemForm").attr('action'), searchdata, function(text) {
       // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
-      add_elem.append(json.text);
+      // add_elem.append(json.text);
       // и удаляем ненужную теперь строку
-      delete json.text;
+      // delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
-      stair[json.name] = JSON.stringify(json);
-      console.log(stair);
-    }, "json");
+      // stair[json.name] = JSON.stringify(json);
+      // console.log(stair);
+      console.log(text);
+    }, "text");
   });
 
   /* -------------------------------------------------------------------------- */
