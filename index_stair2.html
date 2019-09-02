@@ -60,20 +60,33 @@
               <option value="customboard">Нестандартный профиль</option>
               <option value="benthandrail">Гнутый поручень</option>
             </select>
-            <select name="measure_units" id="measure_units">
-              <!-- <option selected disabled>Выберите единицы измерения</option> -->
-              <option value="millimeter" selected>мм</option>
-              <option value="centimeter">см</option>
-              <option value="meter">м</option>
-            </select><br>
             <hr>
             <!-- Элемент, учитываемый по площади -->
-            <label class="square_elem" for="length[sq]">Длина элемента (мм)</label>
-            <input type="text" class="square_elem" name="length[sq]" id="elem_length">
-            <label class="square_elem" for="width[sq]">Ширина элемента (мм)</label>
-            <input type="text" class="square_elem" name="width[sq]" id="elem_width">
-            <label class="square_elem" for="height[sq]">Толщина элемента (мм)</label>
-            <input type="text" class="square_elem" name="height[sq]" id="elem_height">
+              <p class="square_elem">
+                <label class="square_elem" for="length[sq]">Длина элемента (мм)</label>
+                <input type="text" class="square_elem" name="length[sq]" id="elem_length">
+                <select class="square_elem" name="measure_units" id="measure_units">
+                  <option value="millimeter" selected>мм</option>
+                  <option value="centimeter">см</option>
+                  <option value="meter">м</option>
+                </select>
+              </p>
+            <p class="square_elem">
+              <label class="square_elem" for="width[sq]">Ширина элемента (мм)</label>
+              <input type="text" class="square_elem" name="width[sq]" id="elem_width">
+              <select class="square_elem" name="measure_units" id="measure_units">
+                <option value="millimeter" selected>мм</option>
+                <option value="centimeter">см</option>
+              </select>
+            </p>
+            <p class="square_elem">
+              <label class="square_elem" for="height[sq]">Толщина элемента (мм)</label>
+              <input type="text" class="square_elem" name="height[sq]" id="elem_height">
+              <select class="square_elem" name="measure_units" id="measure_units">
+                <option value="millimeter" selected>мм</option>
+                <option value="centimeter">см</option>
+              </select>
+            </p>
             <label class="square_elem" for="quantity[sq]">Количество элементов (шт)</label>
             <input type="text" class="square_elem" name="quantity[sq]" id="elem_quantity">
             <!-- Штучный элемент (балясина, столб) -->
@@ -85,7 +98,9 @@
             <label class="linear_elem" for="quantity[ln]">Количество элементов (шт)</label>
             <input type="text" class="linear_elem" name="quantity[ln]" id="line_quantity">
             <!-- Кнопки -->
+            <br>
             <input type="submit" value="Добавить" id="submitElement" name="submitElement" class="button button-shift">
+            <br>
             <input type="submit" value="Рассчитать" id="submitStair" name="submitStair" class="button button-shift">
           </article>
         </div>

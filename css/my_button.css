@@ -1,0 +1,13 @@
+.button-option {
+  /* width: 30px; */
+  height: 20px;
+  padding: 0 7px 0 5px;
+  line-height: 0px;
+  border: 2px solid #bbb;
+}
+
+.button-option span {
+  font-size: 1.6em;
+  color: red;
+  letter-spacing: -1px;
+}

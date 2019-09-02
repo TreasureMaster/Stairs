@@ -1,0 +1,74 @@
+/* custom styles */
+
+body {background-color: black;}
+
+.header {
+  padding: 0;
+  background-image: url(../imgs/header.jpg);
+  background-size: cover;
+}
+
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.nav a {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.info {background-color: white;}
+
+.footer {color: white; padding: 30px;}
+
+/* Цвета кнопок */
+.button {background-color: rgba(255,255,255,.5); border: none;}
+.button:hover {background-color: rgba(255,255,255,.3);}
+
+/* Заголовки в HEADER */
+.action {
+  text-align: center;
+  padding-top: 3px;
+}
+.action h1 {
+  margin: 30px 0 0 0;
+  font-weight: 600;
+}
+.action h2 {
+  margin: 0 0 20px 0;
+  font-weight: 600;
+}
+
+/* Заголовки и кнопки в основной секции INFO */
+.info h2 {
+  font-size: 3.8rem;
+  text-align: center;
+}
+.info .button {
+  background-color: rgb(215, 143, 97);
+  border: none;
+  color: white;
+}
+.info .button:hover {
+  background-color: rgb(255, 207, 130);
+  border: none;
+}
+.info .button-shift {
+  margin: 10px 0;
+}
+/* article input[type='text'] {
+  width: 100%;
+} */
+/* Отступы между 2 секциями SECTION в основном разделе INFO */
+.info .section:first-of-type {padding-bottom: 0;}
+.info .section:nth-of-type(2) {padding-top: 0;}
+
+/* Цвет текста формы FORM */
+form input {color: black;}
+
+/* Выделение цветом и полужирным текста */
+.greenString {
+  color: green;
+  font-weight: bold;
+}
