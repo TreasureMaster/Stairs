@@ -18,13 +18,8 @@ $(document).ready(function() {
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */
 
   $("select#stair_element").change(function() {
-    // очистить предыдущие значения
-    $("#addElemForm input").not("[type=submit]").each(function(index, value) {
-      // console.log(value.value);
-      value.value = "";
-      // value.removeAttribute("value");
-    });
-    // $("#addElemForm input").removeAttr("value");
+    // очистить предыдущие значения формы
+    $('#addElemForm input:not([type=submit])').val("");
     // получаем номер группы по выбранному элементу
     elem_group = Number(($("select#stair_element").val()).slice(-1));
     switch (elem_group) {
