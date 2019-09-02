@@ -19,7 +19,6 @@ class StairElementRegistry
     public static function getInstance($opts)
       {
         //   Извлечение названия элемента и очистка его от номера категории
-        // $regname = substr($opts['stair_element'], 0, strrpos($opts['stair_element'], '_'));
         $regname = $opts['stair_element'];
         if ($regname == 'shortlevel' || $regname == 'longlevel') { $regname = 'level';}
         switch ($regname) {

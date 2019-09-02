@@ -22,9 +22,7 @@ $(document).ready(function() {
   $("select#stair_element").change(function() {
     // очистить предыдущие значения формы
     $('#addElemForm input:not([type=submit])').val("");
-    // получаем номер группы по выбранному элементу
-    // elem_group = Number(($("select#stair_element").val()).slice(-1));
-    // switch (elem_group) {
+    // определяем группу элементов в зависимости от принадлежности к массиву названий элементов
     if (elem_pcs.indexOf($("select#stair_element").val()) > -1) {
       $(".piece_elem").show();
       $(".square_elem, .linear_elem").hide();
@@ -41,7 +39,6 @@ $(document).ready(function() {
       // выбираем flex_box, куда записываются полученные данные
       add_elem = $("article#stair_level");
     }
-    // }
   });
 
 /* ----------------------- Нажатие клавиши "Добавить" ----------------------- */
