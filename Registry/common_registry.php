@@ -23,7 +23,7 @@ class StairElementRegistry
         if ($regname == 'shortlevel' || $regname == 'longlevel') { $regname = 'level';}
         switch ($regname) {
           case "level":
-              if ($opts["length"]["sq"] > 1000) {
+              if ($opts["length"]["sq"]['value'] > 1000) {
                 $product = new \StairElement\SquareElement\LongLevel($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
                 break;
               } else {

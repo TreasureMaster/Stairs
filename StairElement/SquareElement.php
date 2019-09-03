@@ -24,9 +24,9 @@ abstract class SquareElement extends StairElement
 
   public function __construct($length, $width, $height, $quantity = 0)
   {
-    $this->length = $length;
-    $this->width = $width;
-    $this->height = $height;
+    $this->length = $length['value'];
+    $this->width = $width['value'];
+    $this->height = $height['value'];
     $this->quantity = $quantity;
     $this->marked = Mark::SQUARE;
     // $this->square = $this->getSquare();
