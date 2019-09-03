@@ -63,42 +63,52 @@
             <hr>
             <!-- Элемент, учитываемый по площади -->
               <p class="square_elem">
-                <label class="square_elem" for="length[sq]">Длина элемента (мм)</label>
-                <input type="text" class="square_elem" name="length[sq]" id="elem_length">
-                <select class="square_elem" name="measure_units" id="measure_units">
+                <label for="length[sq]">Длина элемента (мм)</label>
+                <input type="text" name="length[sq]" id="elem_length">
+                <select name="measure_length[sq]">
                   <option value="millimeter" selected>мм</option>
                   <option value="centimeter">см</option>
                   <option value="meter">м</option>
                 </select>
               </p>
             <p class="square_elem">
-              <label class="square_elem" for="width[sq]">Ширина элемента (мм)</label>
-              <input type="text" class="square_elem" name="width[sq]" id="elem_width">
-              <select class="square_elem" name="measure_units" id="measure_units">
+              <label for="width[sq]">Ширина элемента (мм)</label>
+              <input type="text" name="width[sq]" id="elem_width">
+              <select name="measure_width[sq]">
                 <option value="millimeter" selected>мм</option>
                 <option value="centimeter">см</option>
               </select>
             </p>
             <p class="square_elem">
-              <label class="square_elem" for="height[sq]">Толщина элемента (мм)</label>
-              <input type="text" class="square_elem" name="height[sq]" id="elem_height">
-              <select class="square_elem" name="measure_units" id="measure_units">
+              <label for="height[sq]">Толщина элемента (мм)</label>
+              <input type="text" name="height[sq]" id="elem_height">
+              <select name="measure_height[sq]">
                 <option value="millimeter" selected>мм</option>
                 <option value="centimeter">см</option>
               </select>
             </p>
-            <label class="square_elem" for="quantity[sq]">Количество элементов (шт)</label>
-            <input type="text" class="square_elem" name="quantity[sq]" id="elem_quantity">
+            <p class="square_elem">
+              <label for="quantity[sq]">Количество элементов (шт)</label>
+              <input type="text" name="quantity[sq]" id="elem_quantity">
+            </p>
             <!-- Штучный элемент (балясина, столб) -->
-            <label class="piece_elem" for="quantity[pcs]">Количество элементов (шт)</label>
-            <input type="text" class="piece_elem" name="quantity[pcs]" id="elem_pcs">
+            <p class="piece_elem">
+              <label for="quantity[pcs]">Количество элементов (шт)</label>
+              <input type="text" name="quantity[pcs]" id="elem_pcs">
+            </p>
             <!-- Элементы, учитываемые по длине (перила, раскладка) -->
-            <label class="linear_elem" for="length[ln]">Длина элемента (пог.м)</label>
-            <input type="text" class="linear_elem" name="length[ln]" id="elem_meter">
-            <label class="linear_elem" for="quantity[ln]">Количество элементов (шт)</label>
-            <input type="text" class="linear_elem" name="quantity[ln]" id="line_quantity">
+            <p class="linear_elem">
+              <label for="length[ln]">Длина элемента (пог.м)</label>
+              <input type="text" name="length[ln]" id="elem_meter">
+              <label for="quantity[ln]">Количество элементов (шт)</label>
+              <input type="text" name="quantity[ln]" id="line_quantity">
+              <select name="measure_length[ln]">
+                <option value="millimeter" selected>мм</option>
+                <option value="centimeter">см</option>
+                <option value="meter">м</option>
+              </select>
+            </p>
             <!-- Кнопки -->
-            <br>
             <input type="submit" value="Добавить" id="submitElement" name="submitElement" class="button button-shift">
             <br>
             <input type="submit" value="Рассчитать" id="submitStair" name="submitStair" class="button button-shift">
