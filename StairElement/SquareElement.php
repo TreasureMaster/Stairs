@@ -13,9 +13,7 @@ abstract class SquareElement extends StairElement
   protected $length;
   // ширина элемента
   protected $width;
-  // площадь элемента
-  // private $square;
-  // ??? толщина элемента (пока неизвестно нужна ли)
+  // толщина элемента (пока неизвестно нужна ли)
   protected $height;
   // количество элементов (по умолчанию 0)
   protected $quantity;
