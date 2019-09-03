@@ -41,6 +41,22 @@ $(document).ready(function() {
     }
   });
 
+/* -------- Изменения при выборе единиц измерения размеров элементов -------- */
+
+  // для элементов square
+  $("#sq_length select").change(function() {
+    $("#sq_length label span").text($("#sq_length select").val());
+  });
+  $("#sq_width select").change(function () {
+    $("#sq_width label span").text($("#sq_width select").val());
+  });
+  $("#sq_height select").change(function () {
+    $("#sq_height label span").text($("#sq_height select").val());
+  });
+  // для элементов linear
+  $("#ln_length select").change(function () {
+    $("#ln_length label span").text($("#ln_length select").val());
+  });
 /* ----------------------- Нажатие клавиши "Добавить" ----------------------- */
 
   // в данной версии занимается только отправкой данных формы и добавлением полученной от PHP строки

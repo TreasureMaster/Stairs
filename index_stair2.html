@@ -62,29 +62,29 @@
             </select>
             <hr>
             <!-- Элемент, учитываемый по площади -->
-              <p class="square_elem">
-                <label for="length[sq]">Длина элемента (мм)</label>
-                <input type="text" name="length[sq]" id="elem_length">
-                <select name="measure_length[sq]">
-                  <option value="millimeter" selected>мм</option>
-                  <option value="centimeter">см</option>
-                  <option value="meter">м</option>
-                </select>
-              </p>
-            <p class="square_elem">
-              <label for="width[sq]">Ширина элемента (мм)</label>
-              <input type="text" name="width[sq]" id="elem_width">
-              <select name="measure_width[sq]">
-                <option value="millimeter" selected>мм</option>
-                <option value="centimeter">см</option>
+            <p class="square_elem" id="sq_length">
+              <label for="length[sq]">Длина элемента (<span>mm</span>)</label>
+              <input type="text" name="length[sq]" id="elem_length">
+              <select name="measure_length[sq]">
+                <option value="mm" selected>мм</option>
+                <option value="cm">см</option>
+                <option value="m">м</option>
               </select>
             </p>
-            <p class="square_elem">
-              <label for="height[sq]">Толщина элемента (мм)</label>
+            <p class="square_elem" id="sq_width">
+              <label for="width[sq]">Ширина элемента (<span>mm</span>)</label>
+              <input type="text" name="width[sq]" id="elem_width">
+              <select name="measure_width[sq]">
+                <option value="mm" selected>мм</option>
+                <option value="cm">см</option>
+              </select>
+            </p>
+            <p class="square_elem" id="sq_height">
+              <label for="height[sq]">Толщина элемента (<span>mm</span>)</label>
               <input type="text" name="height[sq]" id="elem_height">
               <select name="measure_height[sq]">
-                <option value="millimeter" selected>мм</option>
-                <option value="centimeter">см</option>
+                <option value="mm" selected>мм</option>
+                <option value="cm">см</option>
               </select>
             </p>
             <p class="square_elem">
@@ -97,16 +97,18 @@
               <input type="text" name="quantity[pcs]" id="elem_pcs">
             </p>
             <!-- Элементы, учитываемые по длине (перила, раскладка) -->
-            <p class="linear_elem">
-              <label for="length[ln]">Длина элемента (пог.м)</label>
+            <p class="linear_elem" id="ln_length">
+              <label for="length[ln]">Длина элемента (<span>m</span>)</label>
               <input type="text" name="length[ln]" id="elem_meter">
+              <select name="measure_length[ln]">
+                <option value="m" selected>м</option>
+                <option value="cm">см</option>
+                <option value="mm">мм</option>
+              </select>
+            </p>
+            <p class="linear_elem">
               <label for="quantity[ln]">Количество элементов (шт)</label>
               <input type="text" name="quantity[ln]" id="line_quantity">
-              <select name="measure_length[ln]">
-                <option value="millimeter" selected>мм</option>
-                <option value="centimeter">см</option>
-                <option value="meter">м</option>
-              </select>
             </p>
             <!-- Кнопки -->
             <input type="submit" value="Добавить" id="submitElement" name="submitElement" class="button button-shift">
