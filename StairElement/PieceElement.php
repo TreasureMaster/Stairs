@@ -11,9 +11,9 @@ abstract class PieceElement extends StairElement
   // количество элементов (по умолчанию 0)
   protected $quantity;
 
-  public function __construct($quantity = 0)
+  public function __construct($opts)
   {
-    $this->quantity = $quantity;
+    $this->quantity = $opts['quantity']['pcs'];
     $this->marked = Mark::PIECES;
   }
   // общее количество элементов

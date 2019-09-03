@@ -22,12 +22,12 @@ abstract class SquareElement extends StairElement
   // цена одного элемента (возможно ссылка на объект прайса)
   // private $price;
 
-  public function __construct($length, $width, $height, $quantity = 0)
+  public function __construct($opts)
   {
-    $this->length = $length['value'];
-    $this->width = $width['value'];
-    $this->height = $height['value'];
-    $this->quantity = $quantity;
+    $this->length = $opts['length']['sq']['value'];
+    $this->width = $opts['width']['sq']['value'];
+    $this->height = $opts['height']['sq']['value'];
+    $this->quantity = $opts['quantity']['sq'];
     $this->marked = Mark::SQUARE;
     // $this->square = $this->getSquare();
   }

@@ -13,9 +13,9 @@ abstract class LinearMeterElement extends StairElement
   protected $length;
 
 
-  public function __construct($length = 0)
+  public function __construct($opts)
   {
-    $this->length = $length['value'];
+    $this->length = $opts['length']['ln']['value'];
     $this->marked = Mark::LINEAR;
   }
 

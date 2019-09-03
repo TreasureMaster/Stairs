@@ -22,58 +22,61 @@ class StairElementRegistry
         $regname = $opts['stair_element'];
         if ($regname == 'shortlevel' || $regname == 'longlevel') { $regname = 'level';}
         switch ($regname) {
+            // создание элементов square
           case "level":
               if ($opts["length"]["sq"]['value'] > 1000) {
-                $product = new \StairElement\SquareElement\LongLevel($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+                $product = new \StairElement\SquareElement\LongLevel($opts);
                 break;
               } else {
-                $product = new \StairElement\SquareElement\ShortLevel($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+                $product = new \StairElement\SquareElement\ShortLevel($opts);
                 break;
               }
           case "stairlanding":
-              $product = new \StairElement\SquareElement\StairLanding($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+              $product = new \StairElement\SquareElement\StairLanding($opts);
               break;
           case "stairriser":
-              $product = new \StairElement\SquareElement\StairRiser($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+              $product = new \StairElement\SquareElement\StairRiser($opts);
               break;
           case "figuredlevel":
-              $product = new \StairElement\SquareElement\FiguredLevel($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+              $product = new \StairElement\SquareElement\FiguredLevel($opts);
               break;
           case "bridgeboard":
-              $product = new \StairElement\SquareElement\BridgeBoard($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+              $product = new \StairElement\SquareElement\BridgeBoard($opts);
               break;
           case "jackboard":
-              $product = new \StairElement\SquareElement\JackBoard($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+              $product = new \StairElement\SquareElement\JackBoard($opts);
               break;
           case "stairbaseboard":
-              $product = new \StairElement\SquareElement\StairBaseboard($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+              $product = new \StairElement\SquareElement\StairBaseboard($opts);
               break;
           case "pseudobridgeboard":
-              $product = new \StairElement\SquareElement\PseudoBridgeBoard($opts['length']['sq'], $opts['width']['sq'], $opts['height']['sq'], $opts['quantity']['sq']);
+              $product = new \StairElement\SquareElement\PseudoBridgeBoard($opts);
               break;
+            // создание элементов pieces
           case "baluster":
-              $product = new \StairElement\PieceElement\Baluster($opts['quantity']['pcs']);
+              $product = new \StairElement\PieceElement\Baluster($opts);
               break;
           case "balustradecolumn":
-              $product = new \StairElement\PieceElement\BalustradeColumn($opts['quantity']['pcs']);
+              $product = new \StairElement\PieceElement\BalustradeColumn($opts);
               break;
+            // создание элементов linear
           case "rodcolumn":
-              $product = new \StairElement\LinearMeterElement\RodColumn($opts['length']['ln']);
+              $product = new \StairElement\LinearMeterElement\RodColumn($opts);
               break;
           case "handrail":
-              $product = new \StairElement\LinearMeterElement\Handrail($opts['length']['ln']);
+              $product = new \StairElement\LinearMeterElement\Handrail($opts);
               break;
           case "stairtrim":
-              $product = new \StairElement\LinearMeterElement\StairTrim($opts['length']['ln']);
+              $product = new \StairElement\LinearMeterElement\StairTrim($opts);
               break;
           case "balusterbottomboard":
-              $product = new \StairElement\LinearMeterElement\BalusterBottomBoard($opts['length']['ln']);
+              $product = new \StairElement\LinearMeterElement\BalusterBottomBoard($opts);
               break;
           case "customboard":
-              $product = new \StairElement\LinearMeterElement\CustomBoard($opts['length']['ln']);
+              $product = new \StairElement\LinearMeterElement\CustomBoard($opts);
               break;
           case "benthandrail":
-              $product = new \StairElement\LinearMeterElement\BentHandrail($opts['length']['ln']);
+              $product = new \StairElement\LinearMeterElement\BentHandrail($opts);
               break;
           default:
               $product = false;
