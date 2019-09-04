@@ -5,7 +5,8 @@
     "psr-4": {
       "StairElement\\": "StairElement",
       "Stair\\": "Stair",
-      "StairMaterial\\": "StairMaterial"
+      "StairMaterial\\": "StairMaterial",
+      "Dimension\\": "Dimension"
     },
     "files": [
       "StairMaterial/first_price.php"
