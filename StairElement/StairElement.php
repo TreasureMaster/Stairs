@@ -37,7 +37,13 @@ abstract class StairElement
   {
     foreach ($this as $key => $value) {
       if ($key != 'props' && $key != 'marked') {
+        // if ($key == 'length' || $key == 'width' || $key == 'height') {
+        if (is_object($value)) {
+          $this->props[$key][$this->marked]['value'] = $value->getBaseValue();
+          $this->props[$key][$this->marked]['measure'] = $value->getMeasure();
+        } else {
         $this->props[$key][$this->marked] = $value;
+        }
       }
     }
     $this->props['name'] = $this->getFullElementName();

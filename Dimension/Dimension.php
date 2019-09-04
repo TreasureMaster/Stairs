@@ -35,5 +35,10 @@
     {
       return $this->base_value;
     }
+    // Возврат названия размерности
+    public function getMeasure()
+    {
+      return $this->current_measure;
+    }
   }
 ?>
