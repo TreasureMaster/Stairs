@@ -12,7 +12,7 @@ class LongLevel extends \StairElement\SquareElement
 {
   public function getElementText()
   {
-    return "Ступень длинная {$this->length}x{$this->width} - {$this->quantity} шт.";
+    return "Ступень длинная {$this->getPostfixName()} - {$this->quantity} шт.";
   }
 }
 

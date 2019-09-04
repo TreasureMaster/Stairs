@@ -12,7 +12,7 @@ class BalusterBottomBoard extends \StairElement\LinearMeterElement
 {
   public function getElementText()
   {
-    return "Подбалясная доска - {$this->length} пог.м";
+    return "Подбалясная доска - {$this->length->getMeter()} пог.м";
   }
 }
 ?>

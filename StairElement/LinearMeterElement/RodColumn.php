@@ -12,7 +12,7 @@ class RodColumn extends \StairElement\LinearMeterElement
 {
   public function getElementText()
   {
-    return "Столб опорный - {$this->length} пог.м";
+    return "Столб опорный - {$this->length->getMeter()} пог.м";
   }
 }
 ?>

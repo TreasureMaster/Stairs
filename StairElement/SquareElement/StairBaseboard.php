@@ -12,7 +12,7 @@ class StairBaseboard extends \StairElement\SquareElement
 {
   public function getElementText()
   {
-    return "Сапожки {$this->length}x{$this->width} - {$this->quantity} шт.";
+    return "Сапожки {$this->getPostfixName()} - {$this->quantity} шт.";
   }
 }
 ?>

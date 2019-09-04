@@ -12,7 +12,7 @@ class JackBoard extends \StairElement\SquareElement
 {
   public function getElementText()
   {
-    return "Отбойная доска {$this->length}x{$this->width} - {$this->quantity} шт.";
+    return "Отбойная доска {$this->getPostfixName()} - {$this->quantity} шт.";
   }
 }
 ?>

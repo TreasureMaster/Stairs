@@ -9,11 +9,11 @@
 
 abstract class SquareElement extends StairElement
 {
-  // длина элемента
+  // Объект длины элемента
   protected $length;
-  // ширина элемента
+  // Объект ширины элемента
   protected $width;
-  // толщина элемента (пока неизвестно нужна ли)
+  // Объект толщины элемента (пока неизвестно нужна ли)
   protected $height;
   // количество элементов (по умолчанию 0)
   protected $quantity;
@@ -22,28 +22,33 @@ abstract class SquareElement extends StairElement
 
   public function __construct($opts)
   {
-    $this->length = $opts['length']['sq']['value'];
-    $this->width = $opts['width']['sq']['value'];
-    $this->height = $opts['height']['sq']['value'];
+    $this->length = new \Dimension\Dimension ($opts['length']['sq']);
+    $this->width = new \Dimension\Dimension($opts['width']['sq']);
+    $this->height = new \Dimension\Dimension($opts['height']['sq']);
     $this->quantity = $opts['quantity']['sq'];
     $this->marked = Mark::SQUARE;
     // $this->square = $this->getSquare();
   }
 
-  // площадь одного элемента (для обычных прямоугольников или приведенных к ним фигур)
+  // площадь одного элемента (для обычных прямоугольников или приведенных к ним фигур) в кв.м.
   private function getSquare()
   {
-    return ($this->length / 1000) * ($this->width / 1000);
+    return $this->length->getMeter() * $this->width->getMeter();
   }
   // общая площадь всех элементов (для обычных прямоугольников или приведенных к ним фигур)
   public function getTotalAmount()
   {
     return $this->quantity * $this->getSquare();
   }
+  // Постфикс имени для SQUARE элемента
+  protected function getPostfixName()
+  {
+    return $this->length->getBaseValue() . 'x' . $this->width->getBaseValue();
+  }
   // Полное имя для использования как ключ массива
   public function getFullElementName()
   {
-    return $this->getShortElementName() . '_' . $this->length . 'x' . $this->width;
+    return $this->getShortElementName() . '_' . $this->getPostfixName();
   }
 }
   /* -------------------------------------------------------------------------- */

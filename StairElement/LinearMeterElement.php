@@ -9,25 +9,24 @@
 
 abstract class LinearMeterElement extends StairElement
 {
-  // погонная длина элемента
+  // Объект длины элемента
   protected $length;
-
 
   public function __construct($opts)
   {
-    $this->length = $opts['length']['ln']['value'];
+    $this->length = new \Dimension\Dimension($opts['length']['ln']);
     $this->marked = Mark::LINEAR;
   }
 
   // общая длина для расчетов
   public function getTotalAmount()
   {
-    return $this->length;
+    return $this->length->getMeter();
   }
   // имя соответствует короткому имени, но возможно изменение, если будут использоваться разные элементы (раскладка, поручень)
   public function getFullElementName()
   {
-    return $this->getShortElementName();
+    return $this->getShortElementName() . '_' . $this->length->getBaseValue();
   }
 }
 ?>

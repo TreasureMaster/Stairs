@@ -12,7 +12,7 @@ class PseudoBridgeBoard extends \StairElement\SquareElement
 {
   public function getElementText()
   {
-    return "Фальшкосоур {$this->length}x{$this->width} - {$this->quantity} шт.";
+    return "Фальшкосоур {$this->getPostfixName()} - {$this->quantity} шт.";
   }
 }
 ?>
