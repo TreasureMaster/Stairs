@@ -22,6 +22,8 @@ $(document).ready(function() {
   $("select#stair_element").change(function() {
     // очистить предыдущие значения формы
     $('#addElemForm input:not([type=submit])').val("");
+    // установить мм по умолчанию для всех значений при смене типа элемента формы
+    $("#addElemForm select[name*=measure] option[value=mm]").prop("selected", true);
     // определяем группу элементов в зависимости от принадлежности к массиву названий элементов
     if (elem_pcs.indexOf($("select#stair_element").val()) > -1) {
       $(".piece_elem").show();
@@ -43,6 +45,7 @@ $(document).ready(function() {
 
 /* -------- Изменения при выборе единиц измерения размеров элементов -------- */
 
+  // изменяет только единицы измерения в надписи тега span - мм, см или м
   // для элементов square
   $("#sq_length select").change(function() {
     $("#sq_length label span").text($("#sq_length select").val());
