@@ -82,8 +82,10 @@ $(document).ready(function() {
       // и удаляем ненужную теперь строку
       delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
+      console.log(json);
       stair[json.name] = JSON.stringify(json);
       console.log(stair);
+      $("#addElemForm input[type=radio][value=" + json.name + "]").data("element", JSON.stringify(json));
       // console.log(text);
     }, "json");
   });
@@ -103,6 +105,47 @@ $(document).ready(function() {
       console.log(text);
       // add_elem.append(text);
     }, "text");
+  });
+  /* -------------------------------------------------------------------------- */
+
+  /* ----------------- Нажатие клавиши "Изменить" для BaseElem ---------------- */
+
+  // При нажатии кнопки "рассчитать" отправляется только название кнопки
+  $("#editBaseElem").click(function (event) {
+    // находим выбранные данные (затем нужно вывести их в окно редактирования)
+    console.log($("#editBaseElem").closest("div").find("input[type=radio]:checked").data("element"));
+    // $("#editBaseElem").closest("div").find("input[type=radio]").each(function(index, element) {
+    //   console.log($(this).data("element"));
+    // });
+
+    // event.preventDefault();
+    // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
+    // stair.button = event.currentTarget.id;
+
+    // $.post($("#addElemForm").attr('action'), stair, function (text) {
+      // здесь будет возврат в форму результатов расчета
+      // console.log(text);
+      // add_elem.append(text);
+    // }, "text");
+  });
+  /* -------------------------------------------------------------------------- */
+
+  /* ----------------- Нажатие клавиши "Удалить" для BaseElem ----------------- */
+
+  // При нажатии кнопки "удалить" элемент удаляется из списка (вместе с данными)
+  $("#delBaseElem").click(function (event) {
+    // удалить выбранный элемент из списка
+    $("#delBaseElem").closest("div").find("input[type=radio]:checked").parent().remove();
+
+    event.preventDefault();
+    // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
+    // stair.button = event.currentTarget.id;
+
+    // $.post($("#addElemForm").attr('action'), stair, function (text) {
+    // здесь будет возврат в форму результатов расчета
+    // console.log(text);
+    // add_elem.append(text);
+    // }, "text");
   });
   /* -------------------------------------------------------------------------- */
 
