@@ -29,17 +29,19 @@ $(document).ready(function() {
       $(".piece_elem").show();
       $(".square_elem, .linear_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
-      add_elem = $("article#stair_baluster");
+      // add_elem = $("article#stair_baluster");
+      add_elem = $("p.folddown").has("#editExtraElem");
     } else if (elem_ln.indexOf($("select#stair_element").val()) > -1) {
       $(".linear_elem").show();
       $(".square_elem, .piece_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
-      add_elem = $("article#stair_baluster");
+      // add_elem = $("article#stair_baluster");
+      add_elem = $("p.folddown").has("#editExtraElem");
     } else {
       $(".square_elem").show();
       $(".piece_elem, .linear_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
-      add_elem = $("article#stair_level");
+      add_elem = $("p.folddown").has("#editBaseElem");
     }
   });
 
@@ -75,7 +77,8 @@ $(document).ready(function() {
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
       // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
-      add_elem.append(json.text);
+      // add_elem.append(json.text);
+      add_elem.before(json.text);
       // и удаляем ненужную теперь строку
       delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)

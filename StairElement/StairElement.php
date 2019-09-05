@@ -27,8 +27,9 @@ abstract class StairElement
   // возвращаем HTML-код кнопки
   public function getHtmlButton()
   {
-    $button = '<button id="' . $this->getFullElementName() . '" class="button-option" type="button"><span>--</span></button><span>  ';
-    $button .= $this->getElementText() . '</span><br>';
+    // $button = '<button id="' . $this->getFullElementName() . '" class="button-option" type="button"><span>--</span></button><span>  ';
+    // $button .= $this->getElementText() . '</span><br>';
+    $button = "<p><input type='radio' name='base_elem' value='" . $this->getFullElementName() . "'> {$this->getElementText()}</p>";
     return $button;
   }
 

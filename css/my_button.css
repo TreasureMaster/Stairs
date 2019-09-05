@@ -11,3 +11,8 @@
   color: red;
   letter-spacing: -1px;
 }
+
+.folddown {
+  margin-top: auto;
+  margin-bottom: 0;
+}
