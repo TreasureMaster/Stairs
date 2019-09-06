@@ -12,7 +12,7 @@ class Handrail extends \StairElement\LinearMeterElement
 {
   public function getElementText()
   {
-    return "Поручень - {$this->length->getMeter()} пог.м";
+    return "Поручень - {$this->length->conversionFromBase('m')} пог.м";
   }
 }
 ?>

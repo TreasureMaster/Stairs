@@ -33,17 +33,17 @@ abstract class SquareElement extends StairElement
   // площадь одного элемента (для обычных прямоугольников или приведенных к ним фигур) в кв.м.
   private function getSquare()
   {
-    return $this->length->getMeter() * $this->width->getMeter();
+    return $this->length->conversionFromBase('m') * $this->width->conversionFromBase('m');
   }
   // общая площадь всех элементов (для обычных прямоугольников или приведенных к ним фигур)
   public function getTotalAmount()
   {
     return $this->quantity * $this->getSquare();
   }
-  // Постфикс имени для SQUARE элемента
+  // Постфикс имени для SQUARE элемента (для названия - в мм)
   protected function getPostfixName()
   {
-    return $this->length->getBaseValue() . 'x' . $this->width->getBaseValue();
+    return $this->length->conversionFromBase('mm') . 'x' . $this->width->conversionFromBase('mm');
   }
   // Полное имя для использования как ключ массива
   public function getFullElementName()

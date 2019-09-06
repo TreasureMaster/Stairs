@@ -21,12 +21,13 @@ abstract class LinearMeterElement extends StairElement
   // общая длина для расчетов
   public function getTotalAmount()
   {
-    return $this->length->getMeter();
+    return $this->length->conversionFromBase('m');
   }
   // имя соответствует короткому имени, но возможно изменение, если будут использоваться разные элементы (раскладка, поручень)
+  // для названия - в мм
   public function getFullElementName()
   {
-    return $this->getShortElementName() . '_' . $this->length->getBaseValue();
+    return $this->getShortElementName() . '_' . $this->length->conversionFromBase('mm');
   }
 }
 ?>

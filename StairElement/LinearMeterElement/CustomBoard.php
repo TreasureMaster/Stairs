@@ -12,7 +12,7 @@ class CustomBoard extends \StairElement\LinearMeterElement
 {
   public function getElementText()
   {
-    return "Нестандартный профиль - {$this->length->getMeter()} пог.м";
+    return "Нестандартный профиль - {$this->length->conversionFromBase('m')} пог.м";
   }
 }
 ?>

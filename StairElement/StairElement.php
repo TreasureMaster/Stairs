@@ -40,7 +40,8 @@ abstract class StairElement
       if ($key != 'props' && $key != 'marked') {
         // if ($key == 'length' || $key == 'width' || $key == 'height') {
         if (is_object($value)) {
-          $this->props[$key][$this->marked]['value'] = $value->getBaseValue();
+          // раньше передавали базовую величину, теперь - введенную пользователем
+          $this->props[$key][$this->marked]['value'] = $value->conversionFromBase($value->getMeasure());
           $this->props[$key][$this->marked]['measure'] = $value->getMeasure();
         } else {
         $this->props[$key][$this->marked] = $value;

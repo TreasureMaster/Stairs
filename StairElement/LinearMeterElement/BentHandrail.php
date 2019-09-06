@@ -12,7 +12,7 @@ class BentHandrail extends \StairElement\LinearMeterElement
 {
   public function getElementText()
   {
-    return "Поручень гнутый - {$this->length->getMeter()} пог.м";
+    return "Поручень гнутый - {$this->length->conversionFromBase('m')} пог.м";
   }
 }
 ?>
