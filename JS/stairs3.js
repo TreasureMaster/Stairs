@@ -112,15 +112,28 @@ $(document).ready(function() {
 
   /* ----------------- Нажатие клавиши "Изменить" для BaseElem ---------------- */
 
-  // При нажатии кнопки "рассчитать" отправляется только название кнопки
+  // При нажатии кнопки "изменить"
   $("#editBaseElem").click(function (event) {
     // находим выбранные данные (затем нужно вывести их в окно редактирования)
     console.log($("#editBaseElem").closest("div").find("input[type=radio]:checked").data("element"));
+    let edit_elem = JSON.parse($("#editBaseElem").closest("div").find("input[type=radio]:checked").data("element"));
+    console.log(edit_elem);
+    // выводим название элемента
+    let elem_name = (edit_elem.stair_element == 'shortlevel' || edit_elem.stair_element == 'longlevel') ? 'level' : edit_elem.stair_element;
+    $("select#stair_element option[value=" + elem_name + "]").prop("selected", true);
+    $("select#stair_element").trigger("change");
+    // @todo теперь можно установить все данные для редактирования
+    if ("sq" in edit_elem.quantity) {
+      console.log("SQ существует");
+    } else {
+      console.log("SQ не существует");
+    }
+    // console.log(Object.getOwnPropertyNames(edit_elem.quantity));
     // $("#editBaseElem").closest("div").find("input[type=radio]").each(function(index, element) {
     //   console.log($(this).data("element"));
     // });
 
-    // event.preventDefault();
+    event.preventDefault();
     // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
     // stair.button = event.currentTarget.id;
 
