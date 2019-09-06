@@ -112,19 +112,23 @@ $(document).ready(function() {
 
   /* ----------------- Нажатие клавиши "Изменить" для BaseElem ---------------- */
 
-  // При нажатии кнопки "изменить"
+  // При нажатии кнопки "изменить" для BaseElem обрабатываем только SQUARE-элементы
   $("#editBaseElem").click(function (event) {
-    // находим выбранные данные (затем нужно вывести их в окно редактирования)
-    console.log($("#editBaseElem").closest("div").find("input[type=radio]:checked").data("element"));
+    event.preventDefault();
+    // читаем данные, прикрепленные к строке элемента
     let edit_elem = JSON.parse($("#editBaseElem").closest("div").find("input[type=radio]:checked").data("element"));
     console.log(edit_elem);
-    // выводим название элемента
+    // выбираем и выводим название элемента
     let elem_name = (edit_elem.stair_element == 'shortlevel' || edit_elem.stair_element == 'longlevel') ? 'level' : edit_elem.stair_element;
     $("select#stair_element option[value=" + elem_name + "]").prop("selected", true);
+    // активация события для показа соответствующих полей ввода
     $("select#stair_element").trigger("change");
-    // @todo теперь можно установить все данные для редактирования
+    // установка предыдущих данных для редактирования
     if ("sq" in edit_elem.quantity) {
-      console.log("SQ существует");
+      setPreviousValue("length", edit_elem);
+      setPreviousValue("width", edit_elem);
+      setPreviousValue("height", edit_elem);
+      $("#elem_quantity").val(edit_elem.quantity.sq);
     } else {
       console.log("SQ не существует");
     }
@@ -133,7 +137,6 @@ $(document).ready(function() {
     //   console.log($(this).data("element"));
     // });
 
-    event.preventDefault();
     // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
     // stair.button = event.currentTarget.id;
 
@@ -212,6 +215,15 @@ function getSubmitName(button_name) {
   submit_name.value = button_name;
   return submit_name;
 }
+
+/* --------- Функция вывода сохраненных значений при редактировании --------- */
+
+function setPreviousValue(dim, edit_elem) {
+  $("#sq_" + dim + " label span").text(edit_elem[dim].sq.measure);
+  $("#sq_" + dim + " input").val(edit_elem[dim].sq.value);
+  $('#sq_' + dim + ' select option[value=' + edit_elem[dim].sq.measure + ']').prop("selected", true);
+}
+/* -------------------------------------------------------------------------- */
 
 /* ---------------------- Функция для формы "Изменить" ---------------------- */
 
