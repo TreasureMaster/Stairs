@@ -110,13 +110,13 @@ $(document).ready(function() {
   });
   /* -------------------------------------------------------------------------- */
 
-  /* ----------------- Нажатие клавиши "Изменить" для BaseElem ---------------- */
+  /* ----------------------- Нажатие клавиши "Изменить" ----------------------- */
 
   // При нажатии кнопки "изменить" для BaseElem обрабатываем только SQUARE-элементы
-  $("#editBaseElem").click(function (event) {
+  $("#editBaseElem, #editExtraElem").click(function (event) {
     event.preventDefault();
     // читаем данные, прикрепленные к строке элемента
-    let edit_elem = JSON.parse($("#editBaseElem").closest("div").find("input[type=radio]:checked").data("element"));
+    let edit_elem = JSON.parse($("#" + event.target.id).closest("div").find("input[type=radio]:checked").data("element"));
     console.log(edit_elem);
     // выбираем и выводим название элемента
     let elem_name = (edit_elem.stair_element == 'shortlevel' || edit_elem.stair_element == 'longlevel') ? 'level' : edit_elem.stair_element;
@@ -129,41 +129,22 @@ $(document).ready(function() {
       setPreviousValue("width", edit_elem);
       setPreviousValue("height", edit_elem);
       $("#elem_quantity").val(edit_elem.quantity.sq);
-    } else {
-      console.log("SQ не существует");
+    } else if ("pcs" in edit_elem.quantity) {
+      $("#elem_pcs").val(edit_elem.quantity.pcs);
+    } else if ("ln" in edit_elem.quantity) {
+      setPreviousValue("length", edit_elem, "ln");
+      $("#line_quantity").val(edit_elem.quantity.ln);
     }
-    // console.log(Object.getOwnPropertyNames(edit_elem.quantity));
-    // $("#editBaseElem").closest("div").find("input[type=radio]").each(function(index, element) {
-    //   console.log($(this).data("element"));
-    // });
-
-    // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
-    // stair.button = event.currentTarget.id;
-
-    // $.post($("#addElemForm").attr('action'), stair, function (text) {
-      // здесь будет возврат в форму результатов расчета
-      // console.log(text);
-      // add_elem.append(text);
-    // }, "text");
   });
   /* -------------------------------------------------------------------------- */
 
-  /* ----------------- Нажатие клавиши "Удалить" для BaseElem ----------------- */
+  /* ------------------------ Нажатие клавиши "Удалить" ----------------------- */
 
   // При нажатии кнопки "удалить" элемент удаляется из списка (вместе с данными)
-  $("#delBaseElem").click(function (event) {
-    // удалить выбранный элемент из списка
-    $("#delBaseElem").closest("div").find("input[type=radio]:checked").parent().remove();
-
+  $("#delBaseElem, #delExtraElem").click(function (event) {
     event.preventDefault();
-    // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
-    // stair.button = event.currentTarget.id;
-
-    // $.post($("#addElemForm").attr('action'), stair, function (text) {
-    // здесь будет возврат в форму результатов расчета
-    // console.log(text);
-    // add_elem.append(text);
-    // }, "text");
+    // удалить выбранный элемент из списка
+    $("#" + event.target.id).closest("div").find("input[type=radio]:checked").parent().remove();
   });
   /* -------------------------------------------------------------------------- */
 
@@ -218,10 +199,11 @@ function getSubmitName(button_name) {
 
 /* --------- Функция вывода сохраненных значений при редактировании --------- */
 
-function setPreviousValue(dim, edit_elem) {
-  $("#sq_" + dim + " label span").text(edit_elem[dim].sq.measure);
-  $("#sq_" + dim + " input").val(edit_elem[dim].sq.value);
-  $('#sq_' + dim + ' select option[value=' + edit_elem[dim].sq.measure + ']').prop("selected", true);
+function setPreviousValue(dim, edit_elem, type = "sq") {
+  let prefix = "#" + type + "_" + dim; // создание префикса вида #sq_length
+  $(prefix + " label span").text(edit_elem[dim][type].measure);
+  $(prefix + " input").val(edit_elem[dim][type].value);
+  $(prefix + ' select option[value=' + edit_elem[dim][type].measure + ']').prop("selected", true);
 }
 /* -------------------------------------------------------------------------- */
 

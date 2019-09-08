@@ -11,10 +11,13 @@ abstract class LinearMeterElement extends StairElement
 {
   // Объект длины элемента
   protected $length;
+  // количество одинаковых элементов
+  protected $quantity;
 
   public function __construct($opts)
   {
     $this->length = new \Dimension\Dimension($opts['length']['ln']);
+    $this->quantity = $opts['quantity']['ln'];
     $this->marked = Mark::LINEAR;
   }
 
