@@ -80,14 +80,22 @@ $(document).ready(function() {
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
       // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
       // add_elem.append(json.text);
-      add_elem.before(json.text);
+      // console.log("add_elem:");
+      // console.log(add_elem.siblings());
+      if (add_elem.siblings().is("#" + json.name)) {
+        console.log("Элемент уже есть в списке");
+        console.log(add_elem.siblings("#" + json.name));
+        add_elem.siblings("#" + json.name).replaceWith(json.text);
+      } else {
+        add_elem.before(json.text);
+      }
       // и удаляем ненужную теперь строку
       delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
       console.log(json);
       stair[json.name] = JSON.stringify(json);
       console.log(stair);
-      $("#addElemForm input[type=radio][value=" + json.name + "]").data("element", JSON.stringify(json));
+      $("#addElemForm p[id=" + json.name + "]").data("element", JSON.stringify(json));
       // console.log(text);
     }, "json");
   });
@@ -115,9 +123,13 @@ $(document).ready(function() {
   // При нажатии кнопки "изменить" для BaseElem обрабатываем только SQUARE-элементы
   $("#editBaseElem, #editExtraElem").click(function (event) {
     event.preventDefault();
+    // получаем атрибут id (нужно перенести в "Добавить", здесь не нужен)
+    // если возвращается json с существующим id, то заменяем элемент
+    // let edit_val = $("#" + event.target.id).closest("div").find("input[type=radio]:checked");
+    // console.log(edit_val.attr("id"));
     // читаем данные, прикрепленные к строке элемента
-    let edit_elem = JSON.parse($("#" + event.target.id).closest("div").find("input[type=radio]:checked").data("element"));
-    console.log(edit_elem);
+    let edit_elem = JSON.parse($("#" + event.target.id).closest("div").find("input[type=radio]:checked").parent().data("element"));
+    
     // выбираем и выводим название элемента
     let elem_name = (edit_elem.stair_element == 'shortlevel' || edit_elem.stair_element == 'longlevel') ? 'level' : edit_elem.stair_element;
     $("select#stair_element option[value=" + elem_name + "]").prop("selected", true);

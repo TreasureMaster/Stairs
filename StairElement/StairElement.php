@@ -29,7 +29,7 @@ abstract class StairElement
   {
     // $button = '<button id="' . $this->getFullElementName() . '" class="button-option" type="button"><span>--</span></button><span>  ';
     // $button .= $this->getElementText() . '</span><br>';
-    $button = "<p><input type='radio' name='base_elem' value='" . $this->getFullElementName() . "'> {$this->getElementText()}</p>";
+    $button = "<p id='" . $this->getFullElementName() . "'><input type='radio' name='base_elem'> {$this->getElementText()}</p>";
     return $button;
   }
 
