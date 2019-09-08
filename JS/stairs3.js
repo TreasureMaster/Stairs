@@ -21,6 +21,7 @@ $(document).ready(function() {
 
   $("select#stair_element").change(function() {
     // очистить предыдущие значения формы
+/* -------------------- (!!! это стирает значения value) -------------------- */
     $('#addElemForm input:not([type=submit])').val("");
     // установить мм по умолчанию для всех значений при смене типа элемента формы
     $("#addElemForm select[name*=measure] option[value=mm]").prop("selected", true);
@@ -83,8 +84,14 @@ $(document).ready(function() {
       // console.log("add_elem:");
       // console.log(add_elem.siblings());
       if (add_elem.siblings().is("#" + json.name)) {
+        // let edit_val = $("#editExtraElem").closest("div").find("input[type=radio]:checked");
+        // console.log(edit_val.parent());
+        // найдено, теперь можно поменять (условие is)
+        console.log($("#editBaseElem, #editExtraElem").closest("div").find("p").filter(function() {
+          return $(this).data("check") != null;
+        }));
         console.log("Элемент уже есть в списке");
-        console.log(add_elem.siblings("#" + json.name));
+        // console.log(add_elem.siblings("#" + json.name));
         add_elem.siblings("#" + json.name).replaceWith(json.text);
       } else {
         add_elem.before(json.text);
@@ -92,8 +99,10 @@ $(document).ready(function() {
       // и удаляем ненужную теперь строку
       delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
+      console.log("Объект JSON");
       console.log(json);
       stair[json.name] = JSON.stringify(json);
+      console.log("Объект stair");
       console.log(stair);
       $("#addElemForm p[id=" + json.name + "]").data("element", JSON.stringify(json));
       // console.log(text);
@@ -125,11 +134,17 @@ $(document).ready(function() {
     event.preventDefault();
     // получаем атрибут id (нужно перенести в "Добавить", здесь не нужен)
     // если возвращается json с существующим id, то заменяем элемент
-    // let edit_val = $("#" + event.target.id).closest("div").find("input[type=radio]:checked");
+    $("#" + event.target.id).closest("div")
+                            .find("input[type=radio]:checked")
+                            .parent()
+                            .data("check", "true");
     // console.log(edit_val.attr("id"));
     // читаем данные, прикрепленные к строке элемента
-    let edit_elem = JSON.parse($("#" + event.target.id).closest("div").find("input[type=radio]:checked").parent().data("element"));
-    
+    let edit_elem = JSON.parse($("#" + event.target.id)
+                        .closest("div")
+                        .find("input[type=radio]:checked")
+                        .parent()
+                        .data("element"));
     // выбираем и выводим название элемента
     let elem_name = (edit_elem.stair_element == 'shortlevel' || edit_elem.stair_element == 'longlevel') ? 'level' : edit_elem.stair_element;
     $("select#stair_element option[value=" + elem_name + "]").prop("selected", true);
