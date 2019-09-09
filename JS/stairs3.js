@@ -116,6 +116,7 @@ $(document).ready(function() {
     });
     // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
     stair.button = event.currentTarget.id;
+    console.log(stair);
     $.post($("#addElemForm").attr('action'), stair, function (text) {
       // здесь будет возврат в форму результатов расчета
       console.log(text);

@@ -142,15 +142,18 @@
         </div>
       </div>
     </form>
+    <!-- ------------------------------------------------------------------------------------------------------------- -->
     <!-- Подробные данные о выбранном первом свойстве или функции -->
     <form id="basicParamsForm" name="basicParamsForm" action="flexbox.php" method="POST">
       <div class="section boxes">
+        <!-- 1-й нижний бокс -->
         <div>
-          <h5>Входные данные</h5>
-          <p>Входные данные: <span class="greenString">нет</span></p>
+          <h5>Картинка элемента ?</h5>
+          <h5>Накладные расходы ?</h5>
+          <p>Элемент: <span class="greenString">название ?</span></p>
           <p class="more"><a href="#" class="button">Дополнительно</a></p>
         </div>
-        <div>
+        <!-- <div>
           <h5>Свойство</h5>
           <p>Свойство: <span class="greenString">flex-flow</span><br>
             Разделяется на 2 свойства:<br>
@@ -160,34 +163,39 @@
             а второе указывает допустим ли перенос на следующую строку.
           </p>
           <p class="more"><a href="#" class="button">Дополнительно</a></p>
-        </div>
+        </div> -->
         <div>
-          <h5>Параметры</h5>
-          <p>Параметры <span class="greenString">flex-direction</span><br>
-            <input type="radio" name="flex_direction" id="flex_row" value="row" checked="checked"><span> row</span><br>
+          <h5>Параметры лестницы</h5>
+          <p>Основной материал: <span class="greenString">сосна</span><br>
+            <!-- <input type="radio" name="flex_direction" id="flex_row" value="row" checked="checked"><span> row</span><br>
             <input type="radio" name="flex_direction" id="flex_row_reverse" value="row-reverse"><span>
               row-reverse</span><br>
             <input type="radio" name="flex_direction" id="flex_column" value="column"><span> column</span><br>
             <input type="radio" name="flex_direction" id="flex_column_reverse" value="column-reverse"><span>
-              column-reverse</span><br>
-            Параметры <span class="greenString">flex-wrap</span><br>
-            <input type="radio" name="flex_wrap" id="flex_nowrap" value="nowrap" checked="checked"><span>
+              column-reverse</span><br> -->
+            Дополнительный материал: <span class="greenString">мдф</span><br>
+            <!-- <input type="radio" name="flex_wrap" id="flex_nowrap" value="nowrap" checked="checked"><span>
               nowrap</span><br>
             <input type="radio" name="flex_wrap" id="flex_wrap" value="wrap"><span> wrap</span><br>
             <input type="radio" name="flex_wrap" id="flex_wrap_reverse" value="wrap-reverse"><span>
-              wrap-reverse</span><br>
+              wrap-reverse</span><br> -->
           </p>
           <!-- <p class="more"><a href="#" class="button">Изменить</a></p> -->
           <p class="more"><input type="submit" value="Изменить" name="submit" class="button" id="changeView"></p>
         </div>
-        <aside>
+        <div>
           <h5>Результат</h5>
-          <div id="flexview">
+          <p>Цена материалов:<br>
+          Цена покраски:<br>
+          Цена монтажа:<br>
+          Накладные расходы:</p>
+          <p>Итого:</p>
+          <!-- <div id="flexview">
             <p class="flexelement">1</p>
             <p class="flexelement">2</p>
             <p class="flexelement">3</p>
-          </div>
-        </aside>
+          </div> -->
+        </div>
       </div>
     </form>
     <!-- Вставка полученных значений от PHP -->
