@@ -6,7 +6,7 @@ $(document).ready(function() {
   // массив, содержащий имена LINEAR элементов
   let elem_ln = ['rodcolumn', 'handrail', 'stairtrim', 'balusterbottomboard', 'customboard', 'benthandrail'];
   // собираем все элементы лестницы
-  let stair = Object.create(null);
+  // let stair = Object.create(null);
   // в переменной сохраняется объект, к которому будет добавлена строка
   // сделано более глобально, чтобы сократить код (хотя придется чуть использовать ресурсы компа для ошибочного выбора)
   let add_elem;
@@ -75,7 +75,7 @@ $(document).ready(function() {
     let searchdata = $("#addElemForm").serializeArray();
     // добавляем название кнопки, при помощи которой отправляется форма
     searchdata.push(getSubmitName(event.currentTarget.id));
-    console.log(searchdata);
+    // console.log(searchdata);
 
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
@@ -90,11 +90,11 @@ $(document).ready(function() {
       // и удаляем ненужную теперь строку
       delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
-      console.log("Объект JSON");
-      console.log(json);
-      stair[json.name] = JSON.stringify(json);
-      console.log("Объект stair");
-      console.log(stair);
+      // console.log("Объект JSON");
+      // console.log(json);
+      // stair[json.name] = JSON.stringify(json);
+      // console.log("Объект stair");
+      // console.log(stair);
       $("#addElemForm p[id=" + json.name + "]").data("element", JSON.stringify(json));
       // console.log(text);
     }, "json");
@@ -107,9 +107,15 @@ $(document).ready(function() {
   // При нажатии кнопки "рассчитать" отправляется только название кнопки
   $("#submitStair").click(function (event) {
     event.preventDefault();
+    // собираем объект лестницы для отправки сценарию
+    let stair = Object.create(null);
+    $("#editBaseElem, #editExtraElem").closest("div").find("p").filter(function () {
+      return $(this).data("element") != null;
+    }).each(function(index, value) {
+      stair[value.id] = $(this).data("element");
+    });
     // добавляем информацию о нажатой кнопке в POST-запрос объекта stair
     stair.button = event.currentTarget.id;
-
     $.post($("#addElemForm").attr('action'), stair, function (text) {
       // здесь будет возврат в форму результатов расчета
       console.log(text);
