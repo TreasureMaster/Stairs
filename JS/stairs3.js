@@ -80,18 +80,9 @@ $(document).ready(function() {
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
       // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
-      // add_elem.append(json.text);
-      // console.log("add_elem:");
-      // console.log(add_elem.siblings());
+      // если такой элемент есть, заменяем его (название основывается на ширине и длине или только длине)
+      // иначе - просто вставляем (в т.ч. и то же, но с другими размерами)
       if (add_elem.siblings().is("#" + json.name)) {
-        // let edit_val = $("#editExtraElem").closest("div").find("input[type=radio]:checked");
-        // console.log(edit_val.parent());
-        // найдено, теперь можно поменять (условие is)
-        console.log($("#editBaseElem, #editExtraElem").closest("div").find("p").filter(function() {
-          return $(this).data("check") != null;
-        }));
-        console.log("Элемент уже есть в списке");
-        // console.log(add_elem.siblings("#" + json.name));
         add_elem.siblings("#" + json.name).replaceWith(json.text);
       } else {
         add_elem.before(json.text);
@@ -132,13 +123,6 @@ $(document).ready(function() {
   // При нажатии кнопки "изменить" для BaseElem обрабатываем только SQUARE-элементы
   $("#editBaseElem, #editExtraElem").click(function (event) {
     event.preventDefault();
-    // получаем атрибут id (нужно перенести в "Добавить", здесь не нужен)
-    // если возвращается json с существующим id, то заменяем элемент
-    $("#" + event.target.id).closest("div")
-                            .find("input[type=radio]:checked")
-                            .parent()
-                            .data("check", "true");
-    // console.log(edit_val.attr("id"));
     // читаем данные, прикрепленные к строке элемента
     let edit_elem = JSON.parse($("#" + event.target.id)
                         .closest("div")
