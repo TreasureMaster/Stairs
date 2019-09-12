@@ -26,8 +26,7 @@ $(document).ready(function() {
     // установить мм по умолчанию для всех значений при смене типа элемента формы
     $("#addElemForm select[name*=measure] option[value=mm]").prop("selected", true);
     // установить надписи мм по умолчанию при смене типа элемента формы
-    // $("#addElemForm label[for*=value] span").text("mm");
-    $("label[for*=value] span", "#addElemForm").text("mm");
+    $("#addElemForm label[for*=value] span").text("mm");
     // определяем группу элементов в зависимости от принадлежности к массиву названий элементов
     if (elem_pcs.indexOf($("#stair_element").val()) > -1) {
       $(".piece_elem").show();
