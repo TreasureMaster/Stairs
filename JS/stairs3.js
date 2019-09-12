@@ -19,32 +19,33 @@ $(document).ready(function() {
 
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */
 
-  $("select#stair_element").change(function() {
+  $("#stair_element").change(function() {
     // очистить предыдущие значения формы
 /* -------------------- (!!! это стирает значения value) -------------------- */
     $('#addElemForm input:not([type=submit])').val("");
     // установить мм по умолчанию для всех значений при смене типа элемента формы
     $("#addElemForm select[name*=measure] option[value=mm]").prop("selected", true);
     // установить надписи мм по умолчанию при смене типа элемента формы
-    $("#addElemForm label[for*=value] span").text("mm");
+    // $("#addElemForm label[for*=value] span").text("mm");
+    $("label[for*=value] span", "#addElemForm").text("mm");
     // определяем группу элементов в зависимости от принадлежности к массиву названий элементов
-    if (elem_pcs.indexOf($("select#stair_element").val()) > -1) {
+    if (elem_pcs.indexOf($("#stair_element").val()) > -1) {
       $(".piece_elem").show();
       $(".square_elem, .linear_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
       // add_elem = $("article#stair_baluster");
-      add_elem = $("p.folddown").has("#editExtraElem");
-    } else if (elem_ln.indexOf($("select#stair_element").val()) > -1) {
+      add_elem = $(".folddown").has("#editExtraElem");
+    } else if (elem_ln.indexOf($("#stair_element").val()) > -1) {
       $(".linear_elem").show();
       $(".square_elem, .piece_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
       // add_elem = $("article#stair_baluster");
-      add_elem = $("p.folddown").has("#editExtraElem");
+      add_elem = $(".folddown").has("#editExtraElem");
     } else {
       $(".square_elem").show();
       $(".piece_elem, .linear_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
-      add_elem = $("p.folddown").has("#editBaseElem");
+      add_elem = $(".folddown").has("#editBaseElem");
     }
   });
 
@@ -53,17 +54,17 @@ $(document).ready(function() {
   // изменяет только единицы измерения в надписи тега span - мм, см или м
   // для элементов square
   $("#sq_length select").change(function() {
-    $("#sq_length label span").text($("#sq_length select").val());
+    $("span", "#sq_length").text($("#sq_length select").val());
   });
   $("#sq_width select").change(function () {
-    $("#sq_width label span").text($("#sq_width select").val());
+    $("span", "#sq_width").text($("#sq_width select").val());
   });
   $("#sq_height select").change(function () {
-    $("#sq_height label span").text($("#sq_height select").val());
+    $("span", "#sq_height").text($("#sq_height select").val());
   });
   // для элементов linear
   $("#ln_length select").change(function () {
-    $("#ln_length label span").text($("#ln_length select").val());
+    $("span", "#ln_length").text($("#ln_length select").val());
   });
 /* ----------------------- Нажатие клавиши "Добавить" ----------------------- */
 
@@ -138,9 +139,9 @@ $(document).ready(function() {
                         .data("element"));
     // выбираем и выводим название элемента
     let elem_name = (edit_elem.stair_element == 'shortlevel' || edit_elem.stair_element == 'longlevel') ? 'level' : edit_elem.stair_element;
-    $("select#stair_element option[value=" + elem_name + "]").prop("selected", true);
+    $("#stair_element option[value=" + elem_name + "]").prop("selected", true);
     // активация события для показа соответствующих полей ввода
-    $("select#stair_element").trigger("change");
+    $("#stair_element").trigger("change");
     // установка предыдущих данных для редактирования
     if ("sq" in edit_elem.quantity) {
       setPreviousValue("length", edit_elem);
@@ -219,7 +220,7 @@ function getSubmitName(button_name) {
 
 function setPreviousValue(dim, edit_elem, type = "sq") {
   let prefix = "#" + type + "_" + dim; // создание префикса вида #sq_length
-  $(prefix + " label span").text(edit_elem[dim][type].measure);
+  $("span", prefix).text(edit_elem[dim][type].measure);
   $(prefix + " input").val(edit_elem[dim][type].value);
   $(prefix + ' select option[value=' + edit_elem[dim][type].measure + ']').prop("selected", true);
 }
