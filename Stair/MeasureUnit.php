@@ -1,11 +1,21 @@
 <?php
+  /**
+   * @file
+   * @brief Файл с перечислением единиц измерения MeasureUnit
+   * @warning Неясно его предназначение, возможно следует удалить.
+   */
   namespace Stair;
 
   // Класс-перечисление для маркировки собираемого массива свойств
+  /**
+   * @brief Класс-перечисление единиц измерения
+   * @class MeasureUnit
+   * @todo Возможно, следует удалить. Нужно просмотреть как определяются единицы измерения.
+   */
   final class MeasureUnit
   {
-    const MILLIMETER = 'mm';
-    const CENTIMETER = 'cm';
-    const METER = 'm';
+    const MILLIMETER = 'mm'; ///< Миллиметры
+    const CENTIMETER = 'cm'; ///< Сантиметры
+    const METER = 'm'; ///< Метры
   }
 ?>
