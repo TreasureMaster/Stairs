@@ -17,6 +17,22 @@ $(document).ready(function() {
   var saveattributes = [];
   saveattributes = fontWeight($('input[checked]'));
 
+  console.log($("#material").val());
+
+/* ------------------------ Выбор основного материала ----------------------- */
+
+  $("#material").change(function() {
+    // Если элемент еще не определен, то меняем материал для выбора элементов
+    if ($("#stair_element").val() == null) {
+      $("#elem_material").val($("#material").val());
+    }
+  });
+
+/* ------------------- Нажатие замка при выборе материала ------------------- */
+
+  $("button", "#addElemForm").click(function() {
+    console.log("Нажат замок");
+  });
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */
 
   $("#stair_element").change(function() {

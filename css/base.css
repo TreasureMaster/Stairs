@@ -23,8 +23,8 @@ body {background-color: black;}
 .footer {color: white; padding: 30px;}
 
 /* Цвета кнопок */
-.button {background-color: rgba(255,255,255,.5); border: none;}
-.button:hover {background-color: rgba(255,255,255,.3);}
+button, .button {background-color: rgba(255,255,255,.5); border: none;}
+button, .button:hover {background-color: rgba(255,255,255,.3);}
 
 /* Заголовки в HEADER */
 .action {

@@ -29,18 +29,63 @@
       </div>
     </div>
   </div>
-  <!-- основной раздел info -->
+  <!-- основной раздел info (центральная узкая часть) -->
   <div class="info">
+    <div class="section">
+      <h2>Ввод основных данных о лестнице</h2>
+    </div>
+    <!-- Форма общей информации о лестнице -->
+    <form id="addStairInfo" name="addStairInfo" action="test_1408.php" method="post">
+      <div class="section boxes">
+        <!-- Первый флекс-бокс -->
+        <div>
+          <h5>Данные о заказе</h5>
+          <article>
+            <p><label for="place">Населенный пункт и расстояние (км)</label>
+              <input type="text" name="place" id="place">
+              <input type="text" name="distance" id="distance" size="4" value="30"></p>
+            <p><label for="customer">Имя заказчика</label>
+              <input type="text" name="customer" id="customer"></p>
+            <p><label for="phone">Телефон</label>
+              <input type="text" name="phone" id="phone"></p>
+          </article>
+        </div>
+        <!-- Второй флекс-бокс -->
+        <div>
+          <h5>Данные о лестнице</h5>
+            <p><label for="material">Основной материал</label>
+              <select name="materail" id="material">
+                <option selected disabled>Выберите материал из списка</option>
+                <option value="pine">Сосна</option>
+                <option value="larch">Лиственница</option>
+                <option value="ash">Ясень</option>
+                <option value="oak">Дуб</option>
+              </select></p>
+              <p><label for="paint">Покраска</label>
+                <select name="paint" id="paint">
+                  <option selected disabled>Выберите метод покраски</option>
+                  <option value="unpainted">Без покраски</option>
+                  <option value="clear">Лакирование без тонировки</option>
+                  <option value="tint">Тонировка с лакированием</option>
+                </select></p>
+            <p class="folddown"><input type="submit" value="Сохранить" id="submitInfo" name="submitInfo" class="button button-shift"></p>
+        </div>
+        <!-- Третий флекс-бокс -->
+        <div>
+          <h5>Еще данные или вывод</h5>
+        </div>
+      </div>
+    </form>
     <div class="section">
       <h2>Ввод данных об элементах лестницы</h2>
     </div>
     <!-- First Form начало -->
-    <form id="addElemForm" name="addElemForm" action="test_1408.php" method="POST">
+    <form id="addElemForm" name="addElemForm" action="test_1408.php" method="post">
       <div class="section boxes">
         <div>
           <h5>Выбрать элемент</h5>
           <article>
-            <p>Выберите элемент лестницы</p>
+            <label for="stair_element">Выберите элемент лестницы</label>
             <select name="stair_element" id="stair_element">
               <option selected disabled>Выберите элемент из списка</option>
               <option value="level">Ступень прямая</option>
@@ -60,6 +105,18 @@
               <option value="customboard">Нестандартный профиль</option>
               <option value="benthandrail">Гнутый поручень</option>
             </select>
+            <p>
+              <label for="elem_material">Выберите материал элемента</label>
+              <select name="elem_material" id="elem_material">
+                <option selected disabled>Выберите материал элемента</option>
+                <option value="pine">Сосна</option>
+                <option value="larch">Лиственница</option>
+                <option value="ash">Ясень</option>
+                <option value="oak">Дуб</option>
+                <option value="mdf">МДФ</option>
+              </select>
+              <button type="button" class="button-link" disabled>&#128274</button>
+            </p>
             <hr>
             <!-- Элемент, учитываемый по площади -->
             <p class="square_elem" id="sq_length">
@@ -200,7 +257,7 @@
     </form>
     <!-- Вставка полученных значений от PHP -->
     <div id="phpResult"></div>
-  </div>
+  </div> <!-- end of info class -->
 
   <!-- колонтитул -->
   <div class="footer section">
@@ -215,7 +272,7 @@
         <input class="button-primary" type="submit" value="OK">
       </form>
     </div>
-  </div>
+  </div> <!-- end of footer class -->
   <script src="scripts/jquery-3.3.1.js"></script>
   <script src="JS/stairs3.js"></script>
   <!-- <script src="scripts/jquery.idTabs.min.js"></script> -->
