@@ -25,6 +25,19 @@ $(document).ready(function() {
     // Если элемент еще не определен, то меняем материал для выбора элементов
     if ($("#stair_element").val() == null) {
       $("#elem_material").val($("#material").val());
+      // если определен и changeable = true, то пока ничего не делаем
+    } else if ($("option:selected", "#stair_element").data("changeable")) {
+      $("#elem_material").prop("disabled", false);
+      console.log("Можно изменять");
+    } else {
+      // если определен и changeable = false, то устанавливаем как для основного материала
+      $("#elem_material").val($("#material").val());
+      $("#elem_material").prop("disabled", true);
+      // console.log($("option:selected", "#stair_element").val());
+      // let tests = $("option:selected", "#stair_element").data("changeable");
+      // console.log(tests);
+      // console.log(typeof tests);
+      // console.log(document.getElementById("stair_element").dataset.changeable);
     }
   });
 
@@ -36,6 +49,17 @@ $(document).ready(function() {
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */
 
   $("#stair_element").change(function() {
+    // если основной материал выбран
+    if ($("#material").val() != null) {
+      // если нельзя изменять, устанавливаем как у основного материала
+      if (! $("option:selected", "#stair_element").data("changeable")) {
+        $("#elem_material").val($("#material").val());
+        $("#elem_material").prop("disabled", true);
+      } else {
+        $("#elem_material").prop("disabled", false);
+        console.log("Ничего не меняем");
+      }
+    }
     // очистить предыдущие значения формы
 /* -------------------- (!!! это стирает значения value) -------------------- */
     $('#addElemForm input:not([type=submit])').val("");
