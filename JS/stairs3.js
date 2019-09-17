@@ -5,8 +5,24 @@ $(document).ready(function() {
   let elem_pcs = ['baluster', 'balustradecolumn'];
   // массив, содержащий имена LINEAR элементов
   let elem_ln = ['rodcolumn', 'handrail', 'stairtrim', 'balusterbottomboard', 'customboard', 'benthandrail'];
-  // собираем все элементы лестницы
-  // let stair = Object.create(null);
+  // Объект, отвечающий за переключение замка
+  let lock = {
+    lock: $("#lock"),
+    stop: function() {
+      this.lock.removeClass("button-grant").addClass("button-stop").html("&#128274").prop("disabled", true);
+      $("#elem_material").prop("disabled", true);
+      $("#elem_material").val($("#material").val());
+    },
+    grant: function() {
+      this.lock.removeClass("button-stop").addClass("button-grant").html("&#128274").prop("disabled", false);
+      $("#elem_material").prop("disabled", true);
+      $("#elem_material").val($("#material").val());
+    },
+    made: function() {
+      this.lock.removeClass("button-stop").addClass("button-grant").html("&#128275").prop("disabled", false);
+      $("#elem_material").prop("disabled", false);
+    }
+  };
   // в переменной сохраняется объект, к которому будет добавлена строка
   // сделано более глобально, чтобы сократить код (хотя придется чуть использовать ресурсы компа для ошибочного выбора)
   let add_elem;
@@ -17,22 +33,26 @@ $(document).ready(function() {
   var saveattributes = [];
   saveattributes = fontWeight($('input[checked]'));
 
-  console.log($("#material").val());
+  // console.log($("#material").val());
 
 /* ------------------------ Выбор основного материала ----------------------- */
 
   $("#material").change(function() {
     // Если элемент еще не определен, то меняем материал для выбора элементов
     if ($("#stair_element").val() == null) {
-      $("#elem_material").val($("#material").val());
+      // $("#elem_material").val($("#material").val());
+      lock.stop();
       // если определен и changeable = true, то пока ничего не делаем
     } else if ($("option:selected", "#stair_element").data("changeable")) {
-      $("#elem_material").prop("disabled", false);
-      console.log("Можно изменять");
+      lock.grant();
+      // $("#elem_material").prop("disabled", false);
+      // console.log("Можно изменять");
     } else {
+      // $("#elem_material").val($("#material").val());
+      lock.stop();
       // если определен и changeable = false, то устанавливаем как для основного материала
-      $("#elem_material").val($("#material").val());
-      $("#elem_material").prop("disabled", true);
+      // $("#elem_material").val($("#material").val());
+      // $("#elem_material").prop("disabled", true);
       // console.log($("option:selected", "#stair_element").val());
       // let tests = $("option:selected", "#stair_element").data("changeable");
       // console.log(tests);
@@ -43,28 +63,36 @@ $(document).ready(function() {
 
 /* ------------------- Нажатие замка при выборе материала ------------------- */
 
-  $("button", "#addElemForm").click(function() {
-    console.log("Нажат замок");
+  $("#lock").click(function() {
+    if ($("#lock").text().charCodeAt(1)-56594) {
+      lock.grant();
+    } else {
+      lock.made();
+    }
+    // console.log($("#lock").text().charCodeAt(1));
   });
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */
 
   $("#stair_element").change(function() {
     // если основной материал выбран
-    if ($("#material").val() != null) {
+    // if ($("#material").val() != null) {
       // если нельзя изменять 
-      if (! $("option:selected", "#stair_element").data("changeable")) {
+      if ($("option:selected", "#stair_element").data("changeable")) {
+        lock.grant();
         // устанавливаем как у основного материала
-        $("#elem_material").val($("#material").val());
+        // $("#elem_material").val($("#material").val());
         // и запрещаем выбор
-        $("#elem_material").prop("disabled", true);
+        // $("#elem_material").prop("disabled", true);
       } else {
+        // $("#elem_material").val($("#material").val());
+        lock.stop();
         // иначе, разрешаем выбор материала для элемента лестницы
-        $("#elem_material").prop("disabled", false);
+        // $("#elem_material").prop("disabled", false);
         // меняем замок
-        $("#lock").removeClass("button-stop").addClass("button-grant");
-        console.log("Ничего не меняем");
+        // $("#lock").removeClass("button-stop").addClass("button-grant");
+        // console.log("Ничего не меняем");
       }
-    }
+    // }
     // очистить предыдущие значения формы
 /* -------------------- (!!! это стирает значения value) -------------------- */
     $('#addElemForm input:not([type=submit])').val("");
