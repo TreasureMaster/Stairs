@@ -3,20 +3,39 @@
   margin-bottom: 0;
 }
 
-button.button-link {
-  /* box-sizing: border-box; */
+/* Общий стиль кнопки */
+#lock {
   color: #FFF;
   font-size: 1.4em;
   margin-left: 2%;
   padding: 0 15px;
-  background-color: rgba(255, 0, 0, .3);
   border: 0;
+}
+/* Запрет изменения материала элемента лестницы */
+button.button-stop,
+button.button-stop:active,
+button.button-stop:visited {
+  background-color: rgba(255, 0, 0, .3);
   cursor: not-allowed;
 }
-button.button-link:active,
-button.button-link:visited {
+/* button.button-stop:active,
+button.button-stop:visited {
   background-color: rgba(255, 0, 0, .3);
-}
-button.button-link:hover {
+} */
+button.button-stop:hover {
   background-color: rgba(255, 0, 0, .7);
+}
+/* Разрешение изменения материала элемента лестницы */
+button.button-grant,
+button.button-grant:active,
+button.button-grant:visited {
+  background-color: rgba(72, 221, 0, .3);
+  cursor: pointer;
+}
+/* button.button-grant:active,
+button.button-grant:visited {
+  background-color: rgba(72, 221, 0, .3);
+} */
+button.button-grant:hover {
+  background-color: rgba(72, 221, 0, .7);
 }

@@ -51,12 +51,17 @@ $(document).ready(function() {
   $("#stair_element").change(function() {
     // если основной материал выбран
     if ($("#material").val() != null) {
-      // если нельзя изменять, устанавливаем как у основного материала
+      // если нельзя изменять 
       if (! $("option:selected", "#stair_element").data("changeable")) {
+        // устанавливаем как у основного материала
         $("#elem_material").val($("#material").val());
+        // и запрещаем выбор
         $("#elem_material").prop("disabled", true);
       } else {
+        // иначе, разрешаем выбор материала для элемента лестницы
         $("#elem_material").prop("disabled", false);
+        // меняем замок
+        $("#lock").removeClass("button-stop").addClass("button-grant");
         console.log("Ничего не меняем");
       }
     }
