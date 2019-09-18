@@ -51,31 +51,17 @@ $(document).ready(function() {
   var saveattributes = [];
   saveattributes = fontWeight($('input[checked]'));
 
-  // console.log($("#material").val());
-
 /* ------------------------ Выбор основного материала ----------------------- */
 
   $("#material").change(function() {
     // Если элемент еще не определен, то меняем материал для выбора элементов
     if ($("#stair_element").val() == null) {
-      // $("#elem_material").val($("#material").val());
       lock.stop();
       // если определен и changeable = true, то пока ничего не делаем
     } else if ($("option:selected", "#stair_element").data("changeable")) {
       lock.repair();
-      // $("#elem_material").prop("disabled", false);
-      // console.log("Можно изменять");
     } else {
-      // $("#elem_material").val($("#material").val());
       lock.stop();
-      // если определен и changeable = false, то устанавливаем как для основного материала
-      // $("#elem_material").val($("#material").val());
-      // $("#elem_material").prop("disabled", true);
-      // console.log($("option:selected", "#stair_element").val());
-      // let tests = $("option:selected", "#stair_element").data("changeable");
-      // console.log(tests);
-      // console.log(typeof tests);
-      // console.log(document.getElementById("stair_element").dataset.changeable);
     }
   });
 
@@ -83,35 +69,17 @@ $(document).ready(function() {
 
   $("#lock").click(function() {
     lock.turn();
-    // if ($("#lock").text().charCodeAt(1)-0xDD12) {
-    //   lock.grant();
-    // } else {
-    //   lock.unlock();
-    // }
-    // console.log($("#lock").text().charCodeAt(1));
   });
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */
 
   $("#stair_element").change(function() {
-    // если основной материал выбран
-    // if ($("#material").val() != null) {
-      // если нельзя изменять 
-      if ($("option:selected", "#stair_element").data("changeable")) {
-        lock.grant();
-        // устанавливаем как у основного материала
-        // $("#elem_material").val($("#material").val());
-        // и запрещаем выбор
-        // $("#elem_material").prop("disabled", true);
-      } else {
-        // $("#elem_material").val($("#material").val());
-        lock.stop();
-        // иначе, разрешаем выбор материала для элемента лестницы
-        // $("#elem_material").prop("disabled", false);
-        // меняем замок
-        // $("#lock").removeClass("button-stop").addClass("button-grant");
-        // console.log("Ничего не меняем");
-      }
-    // }
+    // если можно изменять материал элемента
+    if ($("option:selected", "#stair_element").data("changeable")) {
+      lock.grant();
+      // иначе запрещаем выбор
+    } else {
+      lock.stop();
+    }
     // очистить предыдущие значения формы
 /* -------------------- (!!! это стирает значения value) -------------------- */
     $('#addElemForm input:not([type=submit])').val("");
@@ -124,13 +92,11 @@ $(document).ready(function() {
       $(".piece_elem").show();
       $(".square_elem, .linear_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
-      // add_elem = $("article#stair_baluster");
       add_elem = $(".folddown").has("#editExtraElem");
     } else if (elem_ln.indexOf($("#stair_element").val()) > -1) {
       $(".linear_elem").show();
       $(".square_elem, .piece_elem").hide();
       // выбираем flex_box, куда записываются полученные данные
-      // add_elem = $("article#stair_baluster");
       add_elem = $(".folddown").has("#editExtraElem");
     } else {
       $(".square_elem").show();
