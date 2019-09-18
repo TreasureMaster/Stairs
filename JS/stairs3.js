@@ -13,14 +13,14 @@ $(document).ready(function() {
       this.lock.removeClass("button-grant").addClass("button-stop").html("&#128274").prop("disabled", true);
       $("#elem_material").prop("disabled", true);
       $("#lock, #elem_material").css("cursor", "not-allowed");
-      $("#elem_material").val($("#material").prop("value"));
+      $("#elem_material").val($("#stair_material").prop("value"));
     },
     // изменение материала запрещено, но возможно разрешить
     grant: function() {
       this.lock.removeClass("button-stop").addClass("button-grant").html("&#128274")
                .prop("disabled", false).css("cursor", "default");
       $("#elem_material").prop("disabled", true);
-      $("#elem_material").val($("#material").prop("value"));
+      $("#elem_material").val($("#stair_material").prop("value"));
     },
     // изменение материала элемента разрешено
     unlock: function() {
@@ -30,13 +30,12 @@ $(document).ready(function() {
     },
     // переключение между grant и unlock
     turn: function() {
-      if ($("#lock").text().charCodeAt(1) - 0xDD12) { this.grant();}
-      else { this.unlock();}
+      // сравниваем только второй символ с "замком"
+      $("#lock").text().charCodeAt(1) - 0xDD12 ? this.grant() : this.unlock();
     },
     // включение grant или unlock в соответствии со старым значением
     repair: function() {
-      if ($("#lock").text().charCodeAt(1) - 0xDD12) { this.unlock(); }
-      else { this.grant(); }
+      $("#lock").text().charCodeAt(1) - 0xDD12 ? this.unlock() : this.grant();
     } 
   };
   // в начальном положении все запрещено
@@ -53,7 +52,7 @@ $(document).ready(function() {
 
 /* ------------------------ Выбор основного материала ----------------------- */
 
-  $("#material").change(function() {
+  $("#stair_material").change(function() {
     // Если элемент еще не определен, то меняем материал для выбора элементов
     if ($("#stair_element").val() == null) {
       lock.stop();
