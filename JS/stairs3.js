@@ -131,8 +131,11 @@ $(document).ready(function() {
     // готовим данные для отправки
     let searchdata = $("#addElemForm").serializeArray();
     // добавляем название кнопки, при помощи которой отправляется форма
-    searchdata.push(getSubmitName(event.currentTarget.id));
-    // console.log(searchdata);
+    searchdata.push(getSubmitObject("button", event.currentTarget.id));
+    // добавляем тип материала для элемента лестницы
+    searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
+    // console.log(proba);
+    console.log(searchdata);
 
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
@@ -265,10 +268,10 @@ $(document).ready(function() {
 
 /* --------- Функция для добавления в массив объекта-названия кнопки -------- */
 
-function getSubmitName(button_name) {
+function getSubmitObject(name, value) {
   let submit_name = Object.create(null);
-  submit_name.name = "button";
-  submit_name.value = button_name;
+  submit_name.name = name;
+  submit_name.value = value;
   return submit_name;
 }
 
