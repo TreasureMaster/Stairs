@@ -8,21 +8,39 @@ $(document).ready(function() {
   // Объект, отвечающий за переключение замка
   let lock = {
     lock: $("#lock"),
+    // изменение материала элемента запрещено полностью и соответствует основному материалу
     stop: function() {
       this.lock.removeClass("button-grant").addClass("button-stop").html("&#128274").prop("disabled", true);
       $("#elem_material").prop("disabled", true);
-      $("#elem_material").val($("#material").val());
+      $("#lock, #elem_material").css("cursor", "not-allowed");
+      $("#elem_material").val($("#material").prop("value"));
     },
+    // изменение материала запрещено, но возможно разрешить
     grant: function() {
-      this.lock.removeClass("button-stop").addClass("button-grant").html("&#128274").prop("disabled", false);
+      this.lock.removeClass("button-stop").addClass("button-grant").html("&#128274")
+               .prop("disabled", false).css("cursor", "default");
       $("#elem_material").prop("disabled", true);
-      $("#elem_material").val($("#material").val());
+      $("#elem_material").val($("#material").prop("value"));
     },
-    made: function() {
+    // изменение материала элемента разрешено
+    unlock: function() {
       this.lock.removeClass("button-stop").addClass("button-grant").html("&#128275").prop("disabled", false);
       $("#elem_material").prop("disabled", false);
-    }
+      $("#lock, #elem_material").css("cursor", "default");
+    },
+    // переключение между grant и unlock
+    turn: function() {
+      if ($("#lock").text().charCodeAt(1) - 0xDD12) { this.grant();}
+      else { this.unlock();}
+    },
+    // включение grant или unlock в соответствии со старым значением
+    repair: function() {
+      if ($("#lock").text().charCodeAt(1) - 0xDD12) { this.unlock(); }
+      else { this.grant(); }
+    } 
   };
+  // в начальном положении все запрещено
+  lock.stop();
   // в переменной сохраняется объект, к которому будет добавлена строка
   // сделано более глобально, чтобы сократить код (хотя придется чуть использовать ресурсы компа для ошибочного выбора)
   let add_elem;
@@ -44,7 +62,7 @@ $(document).ready(function() {
       lock.stop();
       // если определен и changeable = true, то пока ничего не делаем
     } else if ($("option:selected", "#stair_element").data("changeable")) {
-      lock.grant();
+      lock.repair();
       // $("#elem_material").prop("disabled", false);
       // console.log("Можно изменять");
     } else {
@@ -64,11 +82,12 @@ $(document).ready(function() {
 /* ------------------- Нажатие замка при выборе материала ------------------- */
 
   $("#lock").click(function() {
-    if ($("#lock").text().charCodeAt(1)-56594) {
-      lock.grant();
-    } else {
-      lock.made();
-    }
+    lock.turn();
+    // if ($("#lock").text().charCodeAt(1)-0xDD12) {
+    //   lock.grant();
+    // } else {
+    //   lock.unlock();
+    // }
     // console.log($("#lock").text().charCodeAt(1));
   });
 /* ------------- Изменение формы в зависимости от типа элемента ------------- */

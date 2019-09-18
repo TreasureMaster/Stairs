@@ -16,7 +16,7 @@ button.button-stop,
 button.button-stop:active,
 button.button-stop:visited {
   background-color: rgba(255, 0, 0, .3);
-  cursor: not-allowed;
+  /* cursor: not-allowed; */
 }
 /* button.button-stop:active,
 button.button-stop:visited {
@@ -30,7 +30,7 @@ button.button-grant,
 button.button-grant:active,
 button.button-grant:visited {
   background-color: rgba(72, 221, 0, .3);
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 /* button.button-grant:active,
 button.button-grant:visited {
