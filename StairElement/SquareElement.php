@@ -26,6 +26,7 @@ abstract class SquareElement extends StairElement
     $this->width = new \Dimension\Dimension($opts['width']['sq']);
     $this->height = new \Dimension\Dimension($opts['height']['sq']);
     $this->quantity = $opts['quantity']['sq'];
+    $this->material = $opts['material'];
     $this->marked = Mark::SQUARE;
     // $this->square = $this->getSquare();
   }

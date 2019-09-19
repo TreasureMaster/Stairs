@@ -10,6 +10,8 @@ abstract class StairElement
   protected $props = [];
   // переменная для маркировки массива вывода свойств объекта
   protected $marked;
+  // материал элемента
+  protected $material;
   // Функция, общая для всех элементов. Выдает общую сущность для расчета (общая площадь, общее кол-во, общий погонаж)
   abstract public function getTotalAmount();
 

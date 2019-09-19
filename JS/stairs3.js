@@ -133,8 +133,13 @@ $(document).ready(function() {
     // добавляем название кнопки, при помощи которой отправляется форма
     searchdata.push(getSubmitObject("button", event.currentTarget.id));
     // добавляем тип материала для элемента лестницы
-    searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
-    // console.log(proba);
+    console.log(searchdata);
+    let testing = searchdata.find(item => item.name == "material");
+    console.log(testing);
+    // если свойство material отсутствует в форме (из-за атрибута disabled), то принудительно отправляем его
+    if (!searchdata.find(item => item.name == "material")) {
+      searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
+    }
     console.log(searchdata);
 
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
@@ -150,8 +155,8 @@ $(document).ready(function() {
       // и удаляем ненужную теперь строку
       delete json.text;
       // добавляем элемент в объект лестницы (вид: имя элемента => json-представление элемента)
-      // console.log("Объект JSON");
-      // console.log(json);
+      console.log("Объект JSON");
+      console.log(json);
       // stair[json.name] = JSON.stringify(json);
       // console.log("Объект stair");
       // console.log(stair);
