@@ -133,9 +133,9 @@ $(document).ready(function() {
     // добавляем название кнопки, при помощи которой отправляется форма
     searchdata.push(getSubmitObject("button", event.currentTarget.id));
     // добавляем тип материала для элемента лестницы
-    console.log(searchdata);
-    let testing = searchdata.find(item => item.name == "material");
-    console.log(testing);
+    // console.log(searchdata);
+    // let testing = searchdata.find(item => item.name == "material");
+    // console.log(testing);
     // если свойство material отсутствует в форме (из-за атрибута disabled), то принудительно отправляем его
     if (!searchdata.find(item => item.name == "material")) {
       searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
@@ -212,6 +212,7 @@ $(document).ready(function() {
       setPreviousValue("width", edit_elem);
       setPreviousValue("height", edit_elem);
       $("#elem_quantity").val(edit_elem.quantity.sq);
+      $("#elem_material").val(edit_elem.material.sq);
     } else if ("pcs" in edit_elem.quantity) {
       $("#elem_pcs").val(edit_elem.quantity.pcs);
     } else if ("ln" in edit_elem.quantity) {
