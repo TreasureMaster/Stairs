@@ -44,7 +44,7 @@ $(document).ready(function() {
   // сделано более глобально, чтобы сократить код (хотя придется чуть использовать ресурсы компа для ошибочного выбора)
   let add_elem;
   // скрываем все элементы
-  $(".piece_elem, .linear_elem, .square_elem").hide();
+  $(".pcs, .lnr, .sqr").hide();
 
   // Сохраняем и выделяем элементы с checked (предыдущий проект, удалить)
   var saveattributes = [];
@@ -88,18 +88,18 @@ $(document).ready(function() {
     $("#addElemForm label[for*=value] span").text("mm");
     // определяем группу элементов в зависимости от принадлежности к массиву названий элементов
     if (elem_pcs.indexOf($("#stair_element").val()) > -1) {
-      $(".piece_elem").show();
-      $(".square_elem, .linear_elem").hide();
+      $(".pcs").show();
+      $(".sqr, .lnr").hide();
       // выбираем flex_box, куда записываются полученные данные
       add_elem = $(".folddown").has("#editExtraElem");
     } else if (elem_ln.indexOf($("#stair_element").val()) > -1) {
-      $(".linear_elem").show();
-      $(".square_elem, .piece_elem").hide();
+      $(".lnr").show();
+      $(".sqr, .pcs").hide();
       // выбираем flex_box, куда записываются полученные данные
       add_elem = $(".folddown").has("#editExtraElem");
     } else {
-      $(".square_elem").show();
-      $(".piece_elem, .linear_elem").hide();
+      $(".sqr").show();
+      $(".pcs, .lnr").hide();
       // выбираем flex_box, куда записываются полученные данные
       add_elem = $(".folddown").has("#editBaseElem");
     }
@@ -140,10 +140,12 @@ $(document).ready(function() {
     if (!searchdata.find(item => item.name == "material")) {
       searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
     }
-    console.log(searchdata);
-
+    
+    // searchdata = JSON.stringify(searchdata);
+    // console.log(searchdata);
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
+      // console.log(text);
       // добавляем текст в тот флекс-бокс, который выбрали ранее в зависимости от типа данных
       // если такой элемент есть, заменяем его (название основывается на ширине и длине или только длине)
       // иначе - просто вставляем (в т.ч. и то же, но с другими размерами)

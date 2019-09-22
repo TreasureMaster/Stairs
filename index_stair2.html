@@ -119,53 +119,53 @@
             </p>
             <hr>
             <!-- Элемент, учитываемый по площади -->
-            <p class="square_elem" id="sq_length">
-              <label for="length[sq][value]">Длина элемента (<span>mm</span>)</label>
-              <input type="text" name="length[sq][value]" id="elem_length">
-              <select name="length[sq][measure]">
+            <p class="sqr" id="sq_length">
+              <label for="sqr[length][value]">Длина элемента (<span>mm</span>)</label>
+              <input type="text" name="sqr[length][value]" id="elem_length">
+              <select name="sqr[length][measure]">
                 <option value="mm" selected>мм</option>
                 <option value="cm">см</option>
                 <option value="m">м</option>
               </select>
             </p>
-            <p class="square_elem" id="sq_width">
-              <label for="width[sq][value]">Ширина элемента (<span>mm</span>)</label>
-              <input type="text" name="width[sq][value]" id="elem_width">
-              <select name="width[sq][measure]">
+            <p class="sqr" id="sq_width">
+              <label for="sqr[width][value]">Ширина элемента (<span>mm</span>)</label>
+              <input type="text" name="sqr[width][value]" id="elem_width">
+              <select name="sqr[width][measure]">
                 <option value="mm" selected>мм</option>
                 <option value="cm">см</option>
               </select>
             </p>
-            <p class="square_elem" id="sq_height">
-              <label for="height[sq][value]">Толщина элемента (<span>mm</span>)</label>
-              <input type="text" name="height[sq][value]" id="elem_height">
-              <select name="height[sq][measure]">
+            <p class="sqr" id="sq_height">
+              <label for="sqr[height][value]">Толщина элемента (<span>mm</span>)</label>
+              <input type="text" name="sqr[height][value]" id="elem_height">
+              <select name="sqr[height][measure]">
                 <option value="mm" selected>мм</option>
                 <option value="cm">см</option>
               </select>
             </p>
-            <p class="square_elem">
-              <label for="quantity[sq]">Количество элементов (шт)</label>
-              <input type="text" name="quantity[sq]" id="elem_quantity">
+            <p class="sqr">
+              <label for="sqr[quantity]">Количество элементов (шт)</label>
+              <input type="text" name="sqr[quantity]" id="elem_quantity">
             </p>
             <!-- Штучный элемент (балясина, столб) -->
-            <p class="piece_elem">
-              <label for="quantity[pcs]">Количество элементов (шт)</label>
-              <input type="text" name="quantity[pcs]" id="elem_pcs">
+            <p class="pcs">
+              <label for="pcs[quantity]">Количество элементов (шт)</label>
+              <input type="text" name="pcs[quantity]" id="elem_pcs">
             </p>
             <!-- Элементы, учитываемые по длине (перила, раскладка) -->
-            <p class="linear_elem" id="ln_length">
-              <label for="length[ln][value]">Длина элемента (<span>m</span>)</label>
-              <input type="text" name="length[ln][value]" id="elem_meter">
-              <select name="length[ln][measure]">
+            <p class="lnr" id="ln_length">
+              <label for="lnr[length][value]">Длина элемента (<span>m</span>)</label>
+              <input type="text" name="lnr[length][value]" id="elem_meter">
+              <select name="lnr[length][measure]">
                 <option value="m" selected>м</option>
                 <option value="cm">см</option>
                 <option value="mm">мм</option>
               </select>
             </p>
-            <p class="linear_elem">
-              <label for="quantity[ln]">Количество элементов (шт)</label>
-              <input type="text" name="quantity[ln]" id="line_quantity">
+            <p class="lnr">
+              <label for="lnr[quantity]">Количество элементов (шт)</label>
+              <input type="text" name="lnr[quantity]" id="line_quantity">
             </p>
             <!-- Кнопки -->
             <input type="submit" value="Добавить" id="submitElement" name="submitElement" class="button button-shift">
@@ -274,6 +274,7 @@
     </div>
   </div> <!-- end of footer class -->
   <script src="scripts/jquery-3.3.1.js"></script>
+  <script src="scripts/lodash.js"></script>
   <script src="JS/stairs3.js"></script>
   <!-- <script src="scripts/jquery.idTabs.min.js"></script> -->
 </body>

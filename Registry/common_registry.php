@@ -24,7 +24,7 @@ class StairElementRegistry
         switch ($regname) {
             // создание элементов square
           case "level":
-              if ($opts["length"]["sq"]['value'] > 1000) {
+              if ($opts["sqr"]["length"]['value'] > 1000) {
                 $product = new \StairElement\SquareElement\LongLevel($opts);
                 break;
               } else {

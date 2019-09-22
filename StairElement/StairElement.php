@@ -43,10 +43,10 @@ abstract class StairElement
         // if ($key == 'length' || $key == 'width' || $key == 'height') {
         if (is_object($value)) {
           // раньше передавали базовую величину, теперь - введенную пользователем
-          $this->props[$key][$this->marked]['value'] = $value->conversionFromBase($value->getMeasure());
-          $this->props[$key][$this->marked]['measure'] = $value->getMeasure();
+          $this->props[$key]['value'] = $value->conversionFromBase($value->getMeasure());
+          $this->props[$key]['measure'] = $value->getMeasure();
         } else {
-        $this->props[$key][$this->marked] = $value;
+        $this->props[$key] = $value;
         }
       }
     }

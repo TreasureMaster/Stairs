@@ -13,6 +13,7 @@
   $stair = new Stair\Stair (StairMaterial\PineMaterial::getInstance(specifyMaterial('pine')));
   
   if ($_POST['button'] == 'submitElement') {
+    // echo $_POST;
     // текущий элемент
     $current_elem = StairRegistry\StairElementRegistry::getInstance($_POST);
     $stair->addStairElement($current_elem);
