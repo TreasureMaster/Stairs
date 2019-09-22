@@ -13,7 +13,8 @@ abstract class PieceElement extends StairElement
 
   public function __construct($opts)
   {
-    $this->quantity = $opts['quantity']['pcs'];
+    $this->quantity = $opts['quantity'];
+    $this->material = $opts['material'];
     $this->marked = Mark::PIECES;
   }
   // общее количество элементов

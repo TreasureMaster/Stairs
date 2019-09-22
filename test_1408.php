@@ -13,9 +13,9 @@
   $stair = new Stair\Stair (StairMaterial\PineMaterial::getInstance(specifyMaterial('pine')));
   
   if ($_POST['button'] == 'submitElement') {
-    // echo $_POST;
+    // echo var_dump(json_decode($_POST['info_obj'], true));
     // текущий элемент
-    $current_elem = StairRegistry\StairElementRegistry::getInstance($_POST);
+    $current_elem = StairRegistry\StairElementRegistry::getInstance(json_decode($_POST['info_obj'], true));
     $stair->addStairElement($current_elem);
     echo $current_elem->getJsonProperties();
   }

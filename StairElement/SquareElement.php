@@ -22,10 +22,10 @@ abstract class SquareElement extends StairElement
 
   public function __construct($opts)
   {
-    $this->length = new \Dimension\Dimension ($opts['sqr']['length']);
-    $this->width = new \Dimension\Dimension($opts['sqr']['width']);
-    $this->height = new \Dimension\Dimension($opts['sqr']['height']);
-    $this->quantity = $opts['sqr']['quantity'];
+    $this->length = new \Dimension\Dimension ($opts['length']);
+    $this->width = new \Dimension\Dimension($opts['width']);
+    $this->height = new \Dimension\Dimension($opts['height']);
+    $this->quantity = $opts['quantity'];
     $this->material = $opts['material'];
     $this->marked = Mark::SQUARE;
     // $this->square = $this->getSquare();

@@ -146,7 +146,6 @@ $(document).ready(function() {
         return _.zipObjectDeep([prop_name.substring(4)], [element.value]);
       }
     }).get();
-    // console.log(elem_form);
     // собираем объект элемента
     obj = Object.create(null);
     for (var i = 0; i < elem_form.length; i++) {
@@ -157,15 +156,13 @@ $(document).ready(function() {
       });
     }
     console.log(obj);
-
+    let elem_text = JSON.stringify(obj);
     // готовим данные для отправки
-    let searchdata = $("#addElemForm").serializeArray();
+    let searchdata = [];
+    // let searchdata = $("#addElemForm").serializeArray();
+    searchdata.push(getSubmitObject("info_obj", elem_text));
     // добавляем название кнопки, при помощи которой отправляется форма
     searchdata.push(getSubmitObject("button", event.currentTarget.id));
-    // добавляем тип материала для элемента лестницы
-    // console.log(searchdata);
-    // let testing = searchdata.find(item => item.name == "material");
-    // console.log(testing);
     // если свойство material отсутствует в форме (из-за атрибута disabled), то принудительно отправляем его
     if (!searchdata.find(item => item.name == "material")) {
       searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
