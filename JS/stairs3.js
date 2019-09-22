@@ -128,6 +128,36 @@ $(document).ready(function() {
   $("#submitElement").click (function(event) {
     // отключить стандартное действие по событию click (отправку формы)
     event.preventDefault();
+    // найти название класса видимой формы, которое используется для выбора типа элемента - sq, pcs или ln
+    let visible_class = (_.intersection($(".sqr, .pcs, .lnr", "#addElemForm").filter(":visible")[0].classList, ['sqr', 'pcs', 'lnr'])).join('');
+    elem_form = $("select, input", "#addElemForm").not("[type=submit]").map(function (index, element) {
+      // находим имя свойства (самый быстрый вариант в Firefox, Chrome, Opera, Vivaldi)
+      let prop_name = _.words(element.name, /[^\[\]]+/g).join(".");
+      // базовые свойства возвращаем сразу
+      if (prop_name == 'stair_element' || prop_name == 'material') {
+        return {
+          [prop_name]: element.value
+        };
+        // свойства других элементов удаляем из выборки
+      } else if (prop_name.slice(0, 3) != visible_class) {
+        return null;
+        // и возвращаем расчетные свойства
+      } else {
+        return _.zipObjectDeep([prop_name.substring(4)], [element.value]);
+      }
+    }).get();
+    // console.log(elem_form);
+    // собираем объект элемента
+    obj = Object.create(null);
+    for (var i = 0; i < elem_form.length; i++) {
+      obj = _.mergeWith(obj, elem_form[i], function (objValue, srcValue) {
+        if (_.isArray(objValue)) {
+          return objValue.concat(srcValue);
+        }
+      });
+    }
+    console.log(obj);
+
     // готовим данные для отправки
     let searchdata = $("#addElemForm").serializeArray();
     // добавляем название кнопки, при помощи которой отправляется форма
