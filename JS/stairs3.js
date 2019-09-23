@@ -8,6 +8,8 @@ $(document).ready(function() {
   // Объект, отвечающий за переключение замка
   let lock = {
     lock: $("#lock"),
+    // основной материал лестницы
+    base: 'zero',
     // изменение материала элемента запрещено полностью и соответствует основному материалу
     fixed: function() {
       this.lock.removeClass("button-grant").addClass("button-stop").html("&#128274").prop("disabled", true);
@@ -53,8 +55,10 @@ $(document).ready(function() {
 /* ------------------------ Выбор основного материала ----------------------- */
 
   $("#stair_material").change(function() {
+    // запоминаем основной материал лестницы
+    lock.base = $("#stair_material").val();
     // Если элемент еще не определен, то меняем материал для выбора элементов
-    if ($("#stair_element").val() == null) {
+    if ($("#stair_element").val() == "zero") {
       lock.fixed();
       // если определен и changeable = true, то пока ничего не делаем
     } else if ($("option:selected", "#stair_element").data("changeable")) {
@@ -235,14 +239,11 @@ $(document).ready(function() {
     $("#stair_element option[value=" + elem_name + "]").prop("selected", true);
     // активация события для показа соответствующих полей ввода
     $("#stair_element").trigger("change");
+    // вывод сохраненного материала
+    $("#elem_material").val(edit_elem.material);
+    // открыть замок, если материалы различаются
+    if (lock.base != edit_elem.material) lock.unlock(); 
     // установка предыдущих данных для редактирования
-    // if ("sq" in edit_elem.quantity) {
-    //   setPreviousValue("length", edit_elem);
-    //   setPreviousValue("width", edit_elem);
-    //   setPreviousValue("height", edit_elem);
-    //   $("#elem_quantity").val(edit_elem.quantity);
-    //   $("#elem_material").val(edit_elem.material);
-    // } 
     if (elem_pcs.includes(elem_name)) {
       $("#elem_pcs").val(edit_elem.quantity);
     } else if (elem_lnr.includes(elem_name)) {
@@ -253,7 +254,7 @@ $(document).ready(function() {
       setPreviousValue("width", edit_elem);
       setPreviousValue("height", edit_elem);
       $("#elem_quantity").val(edit_elem.quantity);
-      $("#elem_material").val(edit_elem.material);
+      // $("#elem_material").val(edit_elem.material);
     }
   });
   /* -------------------------------------------------------------------------- */
