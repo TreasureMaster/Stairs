@@ -4,12 +4,12 @@ $(document).ready(function() {
   // массив, содержащий имена PIECES элементов
   let elem_pcs = ['baluster', 'balustradecolumn'];
   // массив, содержащий имена LINEAR элементов
-  let elem_ln = ['rodcolumn', 'handrail', 'stairtrim', 'balusterbottomboard', 'customboard', 'benthandrail'];
+  let elem_lnr = ['rodcolumn', 'handrail', 'stairtrim', 'balusterbottomboard', 'customboard', 'benthandrail'];
   // Объект, отвечающий за переключение замка
   let lock = {
     lock: $("#lock"),
     // изменение материала элемента запрещено полностью и соответствует основному материалу
-    stop: function() {
+    fixed: function() {
       this.lock.removeClass("button-grant").addClass("button-stop").html("&#128274").prop("disabled", true);
       $("#elem_material").prop("disabled", true);
       $("#lock, #elem_material").css("cursor", "not-allowed");
@@ -39,7 +39,7 @@ $(document).ready(function() {
     } 
   };
   // в начальном положении все запрещено
-  lock.stop();
+  lock.fixed();
   // в переменной сохраняется объект, к которому будет добавлена строка
   // сделано более глобально, чтобы сократить код (хотя придется чуть использовать ресурсы компа для ошибочного выбора)
   let add_elem;
@@ -55,12 +55,12 @@ $(document).ready(function() {
   $("#stair_material").change(function() {
     // Если элемент еще не определен, то меняем материал для выбора элементов
     if ($("#stair_element").val() == null) {
-      lock.stop();
+      lock.fixed();
       // если определен и changeable = true, то пока ничего не делаем
     } else if ($("option:selected", "#stair_element").data("changeable")) {
       lock.repair();
     } else {
-      lock.stop();
+      lock.fixed();
     }
   });
 
@@ -77,7 +77,7 @@ $(document).ready(function() {
       lock.grant();
       // иначе запрещаем выбор
     } else {
-      lock.stop();
+      lock.fixed();
     }
     // очистить предыдущие значения формы
 /* -------------------- (!!! это стирает значения value) -------------------- */
@@ -92,7 +92,7 @@ $(document).ready(function() {
       $(".sqr, .lnr").hide();
       // выбираем flex_box, куда записываются полученные данные
       add_elem = $(".folddown").has("#editExtraElem");
-    } else if (elem_ln.indexOf($("#stair_element").val()) > -1) {
+    } else if (elem_lnr.indexOf($("#stair_element").val()) > -1) {
       $(".lnr").show();
       $(".sqr, .pcs").hide();
       // выбираем flex_box, куда записываются полученные данные
@@ -109,18 +109,18 @@ $(document).ready(function() {
 
   // изменяет только единицы измерения в надписи тега span - мм, см или м
   // для элементов square
-  $("#sq_length select").change(function() {
-    $("span", "#sq_length").text($("#sq_length select").val());
+  $("#sqr_length select").change(function() {
+    $("span", "#sqr_length").text($("#sqr_length select").val());
   });
-  $("#sq_width select").change(function () {
-    $("span", "#sq_width").text($("#sq_width select").val());
+  $("#sqr_width select").change(function () {
+    $("span", "#sqr_width").text($("#sqr_width select").val());
   });
-  $("#sq_height select").change(function () {
-    $("span", "#sq_height").text($("#sq_height select").val());
+  $("#sqr_height select").change(function () {
+    $("span", "#sqr_height").text($("#sqr_height select").val());
   });
   // для элементов linear
-  $("#ln_length select").change(function () {
-    $("span", "#ln_length").text($("#ln_length select").val());
+  $("#lnr_length select").change(function () {
+    $("span", "#lnr_length").text($("#lnr_length select").val());
   });
 /* ----------------------- Нажатие клавиши "Добавить" ----------------------- */
 
@@ -236,17 +236,24 @@ $(document).ready(function() {
     // активация события для показа соответствующих полей ввода
     $("#stair_element").trigger("change");
     // установка предыдущих данных для редактирования
-    if ("sq" in edit_elem.quantity) {
+    // if ("sq" in edit_elem.quantity) {
+    //   setPreviousValue("length", edit_elem);
+    //   setPreviousValue("width", edit_elem);
+    //   setPreviousValue("height", edit_elem);
+    //   $("#elem_quantity").val(edit_elem.quantity);
+    //   $("#elem_material").val(edit_elem.material);
+    // } 
+    if (elem_pcs.includes(elem_name)) {
+      $("#elem_pcs").val(edit_elem.quantity);
+    } else if (elem_lnr.includes(elem_name)) {
+      setPreviousValue("length", edit_elem, "lnr");
+      $("#line_quantity").val(edit_elem.quantity);
+    } else {
       setPreviousValue("length", edit_elem);
       setPreviousValue("width", edit_elem);
       setPreviousValue("height", edit_elem);
-      $("#elem_quantity").val(edit_elem.quantity.sq);
-      $("#elem_material").val(edit_elem.material.sq);
-    } else if ("pcs" in edit_elem.quantity) {
-      $("#elem_pcs").val(edit_elem.quantity.pcs);
-    } else if ("ln" in edit_elem.quantity) {
-      setPreviousValue("length", edit_elem, "ln");
-      $("#line_quantity").val(edit_elem.quantity.ln);
+      $("#elem_quantity").val(edit_elem.quantity);
+      $("#elem_material").val(edit_elem.material);
     }
   });
   /* -------------------------------------------------------------------------- */
@@ -312,11 +319,11 @@ function getSubmitObject(name, value) {
 
 /* --------- Функция вывода сохраненных значений при редактировании --------- */
 
-function setPreviousValue(dim, edit_elem, type = "sq") {
-  let prefix = "#" + type + "_" + dim; // создание префикса вида #sq_length
-  $("span", prefix).text(edit_elem[dim][type].measure);
-  $(prefix + " input").val(edit_elem[dim][type].value);
-  $(prefix + ' select option[value=' + edit_elem[dim][type].measure + ']').prop("selected", true);
+function setPreviousValue(dim, edit_elem, type = "sqr") {
+  let prefix = "#" + type + "_" + dim; // создание префикса вида #sqr_length
+  $("span", prefix).text(edit_elem[dim].measure);
+  $(prefix + " input").val(edit_elem[dim].value);
+  $(prefix + ' select option[value=' + edit_elem[dim].measure + ']').prop("selected", true);
 }
 /* -------------------------------------------------------------------------- */
 
