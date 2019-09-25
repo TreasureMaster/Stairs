@@ -132,10 +132,10 @@ $(document).ready(function() {
   $("#submitElement").click (function(event) {
     // отключить стандартное действие по событию click (отправку формы)
     event.preventDefault();
-    // найти название класса видимой формы, которое используется для выбора типа элемента - sq, pcs или ln
+    // найти название класса видимой формы, которое используется сейчас для выбора типа элемента - sqr, pcs или lnr
     let visible_class = (_.intersection($(".sqr, .pcs, .lnr", "#addElemForm").filter(":visible")[0].classList, ['sqr', 'pcs', 'lnr'])).join('');
     elem_form = $("select, input", "#addElemForm").not("[type=submit]").map(function (index, element) {
-      // находим имя свойства (самый быстрый вариант в Firefox, Chrome, Opera, Vivaldi)
+      // находим имя свойства - lehgth, width и т.п. (самый быстрый вариант в Firefox, Chrome, Opera, Vivaldi)
       let prop_name = _.words(element.name, /[^\[\]]+/g).join(".");
       // базовые свойства возвращаем сразу
       if (prop_name == 'stair_element' || prop_name == 'material') {
