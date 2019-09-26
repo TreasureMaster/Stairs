@@ -107,7 +107,7 @@
             </select>
             <p>
               <label for="material">Выберите материал элемента</label>
-              <select name="material" id="elem_material">
+              <select name="material[value]" id="elem_material">
                 <option value="zero" selected disabled>Выберите материал элемента</option>
                 <option value="pine">Сосна</option>
                 <option value="larch">Лиственница</option>
@@ -115,7 +115,7 @@
                 <option value="oak">Дуб</option>
                 <option value="mdf">МДФ</option>
               </select>
-              <button id="lock" type="button" class="button-stop" disabled>&#128274</button>
+              <button id="lock" type="button" name="material[status]" value="fixed" class="button-stop" disabled>&#128274</button>
             </p>
             <hr>
             <!-- Элемент, учитываемый по площади -->

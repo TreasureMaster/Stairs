@@ -8,6 +8,10 @@ $(document).ready(function() {
   // Объект, отвечающий за переключение замка
   let lock = {
     lock: $("#lock"),
+    // получение статуса кнопки "замок"
+    getStatus: function() {
+      return this.lock.val();
+    },
     // основной материал лестницы
     base: 'zero',
     // изменение материала элемента запрещено полностью и соответствует основному материалу
@@ -16,19 +20,22 @@ $(document).ready(function() {
       $("#elem_material").prop("disabled", true);
       $("#lock, #elem_material").css("cursor", "not-allowed");
       $("#elem_material").val($("#stair_material").prop("value"));
+      this.lock.val("fixed");
     },
     // изменение материала запрещено, но возможно разрешить
     grant: function() {
       this.lock.removeClass("button-stop").addClass("button-grant").html("&#128274")
                .prop("disabled", false).css("cursor", "default");
-      $("#elem_material").prop("disabled", true);
+      $("#elem_material").prop("disabled", true).css("cursor", "not-allowed");
       $("#elem_material").val($("#stair_material").prop("value"));
+      this.lock.val("grant");
     },
     // изменение материала элемента разрешено
     unlock: function() {
       this.lock.removeClass("button-stop").addClass("button-grant").html("&#128275").prop("disabled", false);
       $("#elem_material").prop("disabled", false);
       $("#lock, #elem_material").css("cursor", "default");
+      this.lock.val("unlock");
     },
     // переключение между grant и unlock
     turn: function() {
@@ -134,11 +141,13 @@ $(document).ready(function() {
     event.preventDefault();
     // найти название класса видимой формы, которое используется сейчас для выбора типа элемента - sqr, pcs или lnr
     let visible_class = (_.intersection($(".sqr, .pcs, .lnr", "#addElemForm").filter(":visible")[0].classList, ['sqr', 'pcs', 'lnr'])).join('');
-    elem_form = $("select, input", "#addElemForm").not("[type=submit]").map(function (index, element) {
+    elem_form = $("select, input, #lock", "#addElemForm").not("[type=submit]").map(function (index, element) {
       // находим имя свойства - lehgth, width и т.п. (самый быстрый вариант в Firefox, Chrome, Opera, Vivaldi)
       let prop_name = _.words(element.name, /[^\[\]]+/g).join(".");
+      // подготовка имени для материала
+      if (prop_name.slice(0, 8) == 'material') prop_name = visible_class + "." + prop_name;
       // базовые свойства возвращаем сразу
-      if (prop_name == 'stair_element' || prop_name == 'material') {
+      if (prop_name == 'stair_element') {
         return {
           [prop_name]: element.value
         };
@@ -159,6 +168,7 @@ $(document).ready(function() {
         }
       });
     }
+    console.log("Объект из input");
     console.log(obj);
     let elem_text = JSON.stringify(obj);
     // готовим данные для отправки
@@ -168,12 +178,13 @@ $(document).ready(function() {
     // добавляем название кнопки, при помощи которой отправляется форма
     searchdata.push(getSubmitObject("button", event.currentTarget.id));
     // если свойство material отсутствует в форме (из-за атрибута disabled), то принудительно отправляем его
-    if (!searchdata.find(item => item.name == "material")) {
-      searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
-    }
+    // if (!searchdata.find(item => item.name == "material")) {
+    //   searchdata.push(getSubmitObject("material", $("#elem_material").prop("value")));
+    // }
     
     // searchdata = JSON.stringify(searchdata);
-    // console.log(searchdata);
+    console.log("Отсылаемый массив");
+    console.log(searchdata);
     // отправка данных элемента лестницы и добавление в HTML (код создает PHP-скрипт)
     $.post($("#addElemForm").attr('action'), searchdata, function(json) {
       // console.log(text);
@@ -240,9 +251,10 @@ $(document).ready(function() {
     // активация события для показа соответствующих полей ввода
     $("#stair_element").trigger("change");
     // вывод сохраненного материала
-    $("#elem_material").val(edit_elem.material);
+    $("#elem_material").val(edit_elem.material.value);
+    lock[edit_elem.material.status]();
     // открыть замок, если материалы различаются
-    if (lock.base != edit_elem.material) lock.unlock(); 
+    // if (lock.base != edit_elem.material) lock.unlock(); 
     // установка предыдущих данных для редактирования
     if (elem_pcs.includes(elem_name)) {
       $("#elem_pcs").val(edit_elem.quantity);
