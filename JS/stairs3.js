@@ -73,6 +73,15 @@ $(document).ready(function() {
     } else {
       lock.fixed();
     }
+    // изменить основной материал в data всех элементов fixed и grant
+    $("#editBaseElem, #editExtraElem").closest("div").find("p").filter(function () {
+      return $(this).data("element") != null;
+    }).each(function (index, value) {
+      let tmp_data = JSON.parse($(this).data("element"));
+      if (tmp_data.material.status == 'fixed' || tmp_data.material.status == 'grant') tmp_data.material.value = lock.base;
+      $(this).data("element", JSON.stringify(tmp_data));
+      // console.log($(this));
+    });
   });
 
 /* ------------------- Нажатие замка при выборе материала ------------------- */
